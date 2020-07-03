@@ -37,4 +37,10 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDAO.updateUI(bno);
 	}
+	
+	@Override
+	public void update(BoardVO vo) {
+		boardDAO.update(vo);
+		
+	}
 }

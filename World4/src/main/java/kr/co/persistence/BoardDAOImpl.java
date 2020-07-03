@@ -56,4 +56,10 @@ public class BoardDAOImpl implements BoardDAO {
 		// TODO Auto-generated method stub
 		return session.selectOne(NS + ".updateUI", bno);
 	}
+	
+	@Override
+	public void update(BoardVO vo) {
+		// TODO Auto-generated method stub
+		session.update(NS + ".update", vo);
+	}
 }

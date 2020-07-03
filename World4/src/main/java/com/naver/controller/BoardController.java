@@ -55,4 +55,11 @@ public class BoardController {
 		
 		return "/board/update";
 	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(BoardVO vo) {
+		
+		boardService.update(vo);
+		return "redirect:/board/read/" + vo.getBno();
+	}
 }

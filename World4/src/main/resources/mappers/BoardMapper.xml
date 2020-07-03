@@ -26,4 +26,8 @@
 	<select id="updateUI" resultType="BoardVO">
 		select * from board where bno = #{bno}
 	</select>
+	
+	<update id="update">
+		update board set title = #{title}, content = #{content}, writer = #{writer}, updatedate = sysdate where bno = #{bno}
+	</update>
 </mapper>

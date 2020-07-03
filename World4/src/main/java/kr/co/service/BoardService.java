@@ -13,4 +13,6 @@ public interface BoardService {
 	BoardVO read(int bno);
 
 	BoardVO updateUI(int bno);
+
+	void update(BoardVO vo);
 }

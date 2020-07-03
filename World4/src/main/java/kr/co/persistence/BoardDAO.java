@@ -15,4 +15,6 @@ public interface BoardDAO {
 	void increaseViewcnt(int bno);
 
 	BoardVO updateUI(int bno);
+
+	void update(BoardVO vo);
 }
