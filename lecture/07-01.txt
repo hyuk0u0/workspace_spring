@@ -1,0 +1,45 @@
+read작성
+-controller 작성
+	-id를 받아야 하지만 memberDTO타입으로 받아도 된다.
+
+	-update시 requestmapping의 value에 id까지 넣고 id를 동적으로 데이터를 받을 수 있게 만든다.->{id}이런식으로 넣으면 된다.
+	-받아오는 방법은 method에 parameter로 @PathVariable("id")어노테이션을 붙인 parameter를 넣어준다.
+	-이는 반드시 void형태로 만들면 안된다.
+-service interface
+-service class 작성
+
+-dao interface
+-dao class 작성
+	-mapper로  parameter를 넘길때 객체를 보내거나 map을 parameter로 보내거나 string이나int자체를 넘길 수 도 있다.
+
+-mapper 작성
+	
+	- mapper class에 ns+.xxx가 없다고하는 에러는
+	- Mapped Statements collection does not contain value for m.e.m.ad
+	- 1. 서버갱신x
+	- 2. root-context에 제대로 연동x
+	- 3. DaoImpl에서 사용한 id와 Mapper.xml에 등록한 id일치x
+	- 4. 메모리부족->프로젝트클린
+
+
+-view page작성
+
+a tag에 parameter넣을때
+스프링 이전에는 다음방식처럼 넣었지만
+/member/read?id=${dto.id}
+
+다음방식으로 넣는다. -read의 수정 삭제부분참고
+/member/read/${dto.id} 
+
+
+========================================================================
+table 생성
+
+create table depart(
+did varchar2(5) primary key,
+dname varchar2(30) not null
+);
+insert기능구현
+
+service impl에서 
+@Transactional 어노테이션을 붙이면 transaction이 구현된다.

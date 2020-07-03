@@ -1,0 +1,200 @@
+설치 및 개발 환경
+================================================================================================================
+https://spring.io/tools
+Spring Tools 4 for Eclipse
+window 64-bit
+
+압축풀고 내부 content압축파일 압축풀어
+경로 c\workspace_spring으로 지정
+================================================================================================================
+
+
+STS의 HELP메뉴에서 MARKET PLACE 선택 후
+검색창에 spring 입력 후 검색
+spring tools 3 add-on install
+================================================================================================================
+
+
+maven 빌드 프로그램을 이용해 jar 파일 관리
+C:\Users\admin\.m2
+.m2없을 시 파일 옵션 보기탭 
+보호된 운영체제 파일 숨기기(권장)체크해제
+숨김파일,폴더 및 드라이브 표시 체크
+(legacy프로젝트 생성시 생성된 폴더)
+
+
+\repository\
+org\springframework\ 스프링jar 폴더
+나중에 jar오류시 .m2전체를 날려 다시 생성하거나 .m2내 잘못된 jar파일 삭제후 다시 생성
+================================================================================================================
+
+
+spring legacy project 생성
+-> spring mvc project(인터넷이 연결되어야만 생성가능)선택
+생성 
+please~
+->패키지 생성(주의사항)키워드가 최소 3개
+ex)com.naver -> 키워드 2개 불가
+================================================================================================================
+
+server 는 show view other를 통해 servers탭을 생성
+이를 통해 tomcat7.0으로 연결
+
+servers의 tomcat 7.0을 더블클릭하여
+overview/modules중
+orverview의
+port를
+tomcat admin은 8005
+http/1.1은 8089로 설정
+
+브라우져 바꾸는 방법은
+window-preferences-general-web browser탭의 use external web browser를 통해 설정한다.
+================================================================================================================
+
+구조
+수업에서 생성한 hello프로젝트 기준으로
+
+src\main\java\			= 자바 코드입력
+src\main\resources\		= 환경설정 컨트롤
+src\test\java\ 			= 테스트용 코드입력->테스트 주도 개발(TDD)에서 사용
+src\test\resources\		= 테스트용 환경설정
+jre				= 기존 jre
+
+maven dependencies		= 수많은 jar파일 존재	
+
+src\				
+	\main	\webapp\		
+				= 기존 webcontent
+			\resources\
+				=
+			\web-inf\	
+				= 기존 web-inf
+				\calsses\
+				= 클래스파일
+				\spring\ 
+= 두개의 환경설정존재
+(root-)의 자식이 appservlet폴더 내 servlet-con~ 
+servlet-은 웹과 관련된 환경설정 파일\컨트롤러포함(컨트롤러를제외하면 거의없다.)
+root-con~은 그외(service/repository(DAO)/DB/log 등)
+					\appservlet\servlet-context.xml
+					\root-context.xml
+
+				\views\	= jsp파일들
+				\web.xml= frontcontroller 내장되어있는 web설정파일
+<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>	<- frontcontroller	
+design\source탭 두가지 존재
+
+				
+	
+
+
+	pom.xml			= jar파일 내려받을수 있게(maven 설정파일)
+	
+우리가 컨트롤 해야 할것들
+src\main\java\-------------------------------------
+src\main\resources\--------------------------------
+\appservlet\servlet-context.xml
+\root-context.xml
+\views---------------------------------------------
+web.xml
+pom.xml
+--------------------------------------------------를 제외하고는 처음 설정할떄 만 컨트롤 하면 된다.
+
+
+
+================================================================================================================
+pom.xml의 여러탭중 pom.xml탭 클릭후 	java버전 1.8로 수정(jdk1.8)
+					spring버전은 4.2.1로 수정(spring 4.2.1)
+					단위테스트에서 사용할 junit은 4.7이아닌 4.12로 변경
+->동시에 자동적으로 jar파일 다운로드//위 버전은 무엇으로 학습했는지 알고 있어야 한다.
+
+프로젝트에서 properties
+					project facets 에서 java버전을 1.6에서 1.8로 변경
+
+================================================================================================================
+.m2 메이븐에서 파일 삭제후 sts재실행을 통한 다운로드시 
+다운로드 완료 후 프로젝트 우클릭 maven 에 update project -> offline/force~를 체크 후 적용시켜야 한다.
+다시 java버전도 facets에서 변경시켜야한다.
+
+
+================================================================================================================
+메모리 문제로 dto클래스가 적용안되거나 다른 문제가 생긴다면
+project-clean을 실행 할 시 server를 stop하고 관련project만 clean해줘야한다.
+================================================================================================================
+window preferences
+general workspace 
+	->text encoding
+json 	->json file
+web 	->css
+	->html
+	->jsp
+corelibrary등을 사용하기위한 templates작업
+window preferences
+jsp files -> editor -> templates
+New JSP File (html 5)	JSP with html 5 markup에
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+추가로 cdn방식으로
+https://www.w3schools.com/의 lean bootstrap3에서 try it을 눌러 <meta~ 부터 /head>전까지 복사
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+meta charset="euc-kr"에 붙여넣는다.
+그리고 이를 위 템플릿에 집어넣는다.
+================================================================================================================
+maven dependencies-> spring-web-4.2.1-> web.filter 복사 그내부 charencoding복사
+org.springframework.web.filter	//패키지
+.CharacterEncodingFilter	//클래스
+합쳐서 넣는다
+
+결과
+<filter>
+	<filter-name>encoding</filter-name>
+	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	<init-param>
+		<pama-name>encoding</pama-name>
+		<param-value>UTF-8</param-value>
+	</init-param>
+	
+	<init-param>
+		<param-name>forceEncoding</param-name>
+		<param-value>true</param-value>
+	</init-param>
+</filter>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+================================================================================================================
+
+
+컨트롤러
+@RequestMapping(value = "/", method = RequestMethod.GET)
+"/" url 기존 .do를 사용하려면 사용가능
+get방식
+public String home(local locale,~) -->이method를 mvc 핸들러 라고 부른다.
+:클라이언트의 요청을 처리해주는 메소드
+
+
+return "string";의 의미는
+web-inf/views/string.jsp
+return형식으로 string을 사용하지 않고 void를 사용한다면 
+uri와 같은 web-inf/views의 jsp파일을 실행시킨다.
+
+기존처럼
+httpservletrequest requset 파라미터를넣어 request.getparameter를통해 받아올 필요 없이
+spring에서는 String name파라미터만 넣어도 된다.
+
+
+
+@어노테이션이 붙어있다면 객체가 될 후보들인데
+servlet-context의 component-scan을 통해 객체가 된다.
+
+spring은 인터페이스기반
+디렉토리패턴기반

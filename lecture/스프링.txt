@@ -1,0 +1,178 @@
+1.
+spring.io/tools
+- windows 64-bit 다운
+
+2. 다운받은거 압축풀고 content 파일 압축 해제 그안의 SpringToolSuit4.exe를 마우스 우클릭하여 관리자 권한으로 실행
+sts의 [help]메뉴에서 [marketplace] 선택 후 검색 창에 spring 입력 후 검색
+Spring Tools 3 Add-on install 컨펌
+
+
+레거시 프로젝트 - Spring MVC Project 선택 - 패키지명 kr.co.ca
+
+window - show view - other - servers 클릭
+서버스탭에서 tomcat 7.0 클릭 - 톰캣 경로 설정 피니시
+
+severs에 포트를 8005로 만듬
+
+window - preferences - web browser - use external web browser 클릭
+chrome으로 선택
+
+porm.xml 자바버전 1.8
+스프링프레임워크 버전 4.2.1로 바꿈
+<!-- Test -->에있는 버전을 4.12 (단위테스트)
+
+프로젝트 마우스 우클릭 properties -Project Facets - 자바버전 1.8로 바꾸기
+jar 파일 제대로 안되서 삭제했다가 다 추가되면 프로젝트 마우스 우클릭 메이븐 - 업데이트 프로젝트 체크 다해버리기(오프라인이랑 그밑에밑에꺼)
+
+다시 자바 1.8로 바꿔야함
+
+dto가 있는데 없다고하면  서버 꺼주고 위에 탭 프로젝트 - clean
+
+윈도우 preferences에서 제너럴 workspace json css html jsp 다 utf-8로 바꾸기
+윈도우 preferences에서 jsp파일 templates - new jsp file html 5에 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+붙여넣기
+
+한글인코딩
+web.xml에서 리스너 위에 
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+컨트롤러로 해줄려면 servlet-context.xml 밑에 컨트롤러 추가해줘야함
+--------------------
+mvc 핸들러:
+클라이언트의 요청을 처리해주는 메서드
+
+
+1. src/main/java-----------------
+2. src/main/resources------------
+3. servlet-context.xml
+4. root-context.xml
+5. views-------------------
+6. web.xml
+7. pom.xml
+
+porm.xml에 추가하기 검색어: maven mybatis 
+mybatis 3.2.8
+mybatis Spring 1.2.2
+spring-jdbc 4.2.1
+spring-test 4.2.1
+
+root-context namespaces 체크목록
+aop context jdbc mybatis-spring tx ))
+
+root-context에
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property value="oracle.jdbc.driver.OracleDriver" name="driverClassName"></property>
+			<property value="jdbc:oracle:thin:@localhost:1521:xe" name="url"></property>
+			<property value="ca5" name="username"></property>
+			<property value="ca5" name="password"></property>
+		</bean>
+넣기 
+
+1. sts 종료
+2. 해당 디펜던시 폴더 삭제
+3. sts 재실행
+4. maven - update - 2개 체크
+5. properties - project facets jdb1.8설정
+6. 저장 및 실행
+
+
+
+
+마이바티스
+
+mybatis-config.xml
+
+ create table member(
+  2  id varchar2(4) primary key,
+  3  name varchar2(21) not null,
+  4  age number(3) default 0
+  5  );
+==========================================================
+1. table 생성
+2. 도메인 ex)DTO클래스 등등..
+3. DAO interface
+4. mapper.xml
+5. daoimpl ex) .class
+6. service interface
+7. serviceimpl
+8. controller
+9. view
+
+============================================
+Mapped Statements collection does not contain value for m.e.m.read
+1. ~Mapper.xml 새로 입혁 후에 서버 갱신 안했을 때
+2. DaoImpl에서 사용한 id와 Mapper.xml에 등록한 id가 일치할 때
+3. root-context.xml에 Mapper.xml이 등록되어 있지 않을 때
+4. 메모리가 부족해서 번경된 내용이 반영이 안되는 경우...프로젝트-클린
+
+
+jackson-databind 2.5.4
+
+리다이렉트 바인딩 방법 2개! 
+
+model 방식 주소창에 데이터가 남음
+
+	@RequestMapping("test2")
+	public String test2(Model model) { //데이터가 주소창에 남음
+		model.addAttribute("str1", "what"); 
+		return "redirect:/test3";
+	}
+
+RedirectAttrubutes 방식 주소창에 데이터가 안남음
+
+	@RequestMapping("test4")
+	public String test4(RedirectAttributes rtts) { //데이터가 주소창에 안남음
+		rtts.addFlashAttribute("str2", "who"); 
+		return "redirect:/test5";
+	}
+
+1. Object class
+2. function keyword를 이용해서 class를 만들고, 그 클래스를 이용해서 객체를 만듬
+3. JSON(JavaScript Object Notation)
+
+TestController를 이용해서
+view 로 넘어가고
+view에서 ajax통신을 하면
+RestTestController로 요청함
+
+
+create table board(
+bno number primary key,
+title varchar2(100) not null,
+content varchar2(3000) not null,
+writer varchar2(21) not null,
+viewcnt number default 0,
+regDate date default sysdate,
+updateDate date default sysdate
+);
+
+
+==========================
+보드vo - pageto - boardDAO - BoardMapper - BoardDAOimpl - 

@@ -1,0 +1,131 @@
+//Java //Java JDK 8 다운로드
+Java -> 윈도우 + S -> 시스템 환경 변수 편집 검색 -> 고급탭 -> 환경변수
+-> 새로만들기 -> 변수이름 JAVA_HOME 변수 값 C:\Program Files\Java\jdk1.8.0_241 (자바 jdk경로)
+Path C:\Program Files\Java\jdk1.8.0_241\bin - cmd - javac(여러줄 나오면 완료)
+
+//Eclipse //eclipse zip download 2019 12 버전 다운로드
+Eclipse실행 -> window preferences -> Workspace, CSS, HTML, JSP 모두 UTF-8로 변경
+emmet eclipse 구글링
+이클립스 help - install new software - http://download.emmet.io/eclipse/updates/ 복사 넣기
+
+window - preferences - keys - binding - Ctrl-M 찾아서 merge Lines를 unbind해야함
+
+window - preferences - font - text font클릭 - D2Coding ㄱㄱ 
+
+window - preferences - emmet - 확장자 제일앞에 jsp, jspf, tag, 넣기
+
+
+//Oracle DB
+오라클 -> 다운로드 -> Oracle Database 11g Release 2 
+-> Oracle Database 11g Relase 2 Express Edition for Windows 64
+
+내PC 우클릭 관리 -> 서비스 및 응용프로그램 -> 서비스 -> OracleServiceXE, OracleXETNSListener 실행 되었는지 확인
+setup.exe - 비번 sys1234
+
+//이클립스 DB
+
+이클립스 window - preferences - java - build path -
+Classpath Variable
+
+C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib 에 있는
+ojdbc6.jar를 
+C:\Program Files\Java\jre1.8.0_241\lib\ext 로 복사
+
+window  - show view - other - Data Management - Data Source Explorer
+
+Database connections 마우스 우클릭 new - Oracle - driver Definiton (나침반모양)
+- name탭에 Oracle Thin Driver11 - JAR LIST 탭 - 기존에 있던거 clear All - add jar
+- C:\Program Files\Java\jre1.8.0_241\lib\ext 에 있는 ojdbc6.jar 열기 -
+Properties탭 - Connertion URL - @뒤에 localhost적기 - 맨뒤에 xe 적기 - 
+Database Name에 xe적기 - User ID에 ca2 패스워드 ca2 (계정 생성되어있어야함 cmd작업) - 
+New Oracle 커넥션해버리기
+
+프로젝트에 new - SQL FILE - 파일명 test 파일 생성
+ORacle_11, New Oracle, xe 선택 피니쉬
+
+General - File - test2.sql finish
+
+//JSP
+http://tomcat.apache.org/ -> 좌측메뉴 -> Download -> Tomcat7
+-> Binary Distributions - 32-bit-/64-bit Windows Service Installer (pgp, sha512) 다운로드
+Host Manager, Examples 선택 -> 커넥션 포트 8089 -> username - ca, passowrd - ca
+0~1023:system port //사용하면안댐
+1024~65535 아무거나 사용가능
+자바 jre가 있는곳 찾아준다
+tomcat 설치된폴더 - bin - tomcat7w.exe 실행! - Start하면 localhost:8089 인터넷 주소창
+window preferences -> Workspace, CSS, HTML, JSP 모두 UTF-8로 변경
+Servers 탭 -> No servers... 클릭 -> Apache -> Tomcat 7.0 클릭 -> tomcat7.0 폴더 선택 -> finish
+Servers 탭 -> Tomcat서버 만들어진거 더블클릭 -> tomcat admin port 8009 -> 저장
+//jstl
+
+tomcat.apache.org 에서 Taglibs 탭 클릭 - download로 들어가기 - Apache Standard Taglib 클릭
+- 1.1버전 다운로드 클릭 -  binaries/ 클릭 - 밑에서 6번째 jakarta-taglibs-standard-1.1.2.zip  다운로드 - 압춘풀고 lib안에 있는거 두개 복사해서
+tomcat에 lib 붙여넣기 ㄱㄱ - jsp파일에 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 코드입력
+
+//cos (업로드관련)
+
+servlets.com - com.oreilly.servlet - cos-20.08.zip 내려받기 - 압축풀고 lib에 있는
+cos.jar 복사
+
+//스프링
+spring.io/tools
+- windows 64-bit 다운
+
+2. 다운받은거 압축풀고 content 파일 압축 해제 그안의 SpringToolSuit4.exe를 마우스 우클릭하여 관리자 권한으로 실행
+sts의 [help]메뉴에서 [marketplace] 선택 후 검색 창에 spring 입력 후 검색
+Spring Tools 3 Add-on install 컨펌
+
+window - show view - other - servers 클릭
+서버스탭에서 tomcat 7.0 클릭 - 톰캣 경로 설정 피니시
+
+severs에 포트를 8005로 만듬
+
+window - preferences - web browser - use external web browser 클릭
+chrome으로 선택
+
+porm.xml 자바버전 1.8
+스프링프레임워크 버전 4.2.1로 바꿈
+<!-- Test -->에있는 버전을 4.12 (단위테스트)
+
+프로젝트 마우스 우클릭 properties -Project Facets - 자바버전 1.8로 바꾸기
+jar 파일 제대로 안되서 삭제했다가 다 추가되면 프로젝트 마우스 우클릭 메이븐 - 업데이트 프로젝트 체크 다해버리기(오프라인이랑 그밑에밑에꺼)
+
+다시 자바 1.8로 바꿔야함
+
+dto가 있는데 없다고하면  서버 꺼주고 위에 탭 프로젝트 - clean
+
+윈도우 preferences에서 제너럴 workspace json css html jsp 다 utf-8로 바꾸기
+윈도우 preferences에서 jsp파일 templates - new jsp file html 5에 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+붙여넣기
+
+web.xml에서 리스너 위에 
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+

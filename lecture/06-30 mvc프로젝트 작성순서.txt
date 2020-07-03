@@ -1,0 +1,15 @@
+
+보편적인 mvc project생성순서
+
+1.table생성
+2.도메인생성(DTO)
+3.dao interface 생성
+4.mapper.xml - 그 안에 들어가는 태그들
+5.dao 구현체 생성(class)-daoimpl
+6.service interface 생성
+7.service구현체 생성(class)-serviceimpl
+8.controller
+9.view
+
+역순으로하거나
+345만354로하는 경우도 많다.

@@ -1,0 +1,277 @@
+
+보편적인 mvc project생성순서
+
+1.table생성
+2.도메인생성
+3.dao interface 생성
+4.mapper.xml - 그 안에 들어가는 태그들
+5.dao 구현체 생성(class)-daoimpl
+6.service interface 생성
+7.service구현체 생성(class)-serviceimpl
+8.controller
+9.view
+
+======================================================================================================
+legacy project를 생성할 때
+kr.co.ca로 패키지를 만들면
+url 주소가 ca로 끝나지만
+
+servers의 모듈에서 path를 /를 남기고 지워주면 root - context에서 작업을 하게 만든다.
+
+해당war파일을 ROOT.war(대문자root)을 톰캣에 놓어준다면 위의 과정없이 진행된다.
+war file 추출방법 - 프로젝트 우클릭 export - warfile
+
+서비스 - 포트번호없애는법 - 포트번호80
+tomcat-conf-server.xml 8089->80
+이클립스의톰캣과 개별적파일
+
+
+컨트롤러만들어라
+->
+어노테이션붙어라
+객체만들도록 servlet-context설정
+======================================================================================================
+requestmapping의 value에는 {"hello","HELLO"}와 같은 배열을 넣을 수 있다.
+return 값인 string은 servlet-context의 InternalResourceViewResolver를통해
+web-inf의views에있는 해당string.jsp가실행
+======================================================================================================
+get방식으로 서버가 넘겨주는 데이터를 한글 인코딩 하기 위해 
+method를 만들어 인코딩하는 방식을 사용하지 않고
+수업에서는 빠른 진도를 위해 한번만 해놓으면 되는 방법인 아래의 방법을 사용한다.
+servers-tomcat v7.0~-server.xml의
+65번line<Connector connectionTimeout="20000" port="8089" protocol="HTTP/1.1" redirectPort="8443"/>
+에 URIEncoding="UTF-8"를 추가한다.
+
+두방법 모두를 사용해 인코딩하면 인코딩작업이 충돌되어 에러가 뜬다.
+======================================================================================================
+spring mvc model기본구조
+	 					    ▶		  ▶
+					Controller  ◀	service   ◀	dao(repository)
+		Handler Mapping			▲ ▼			▲	▼
+	데이터처리방법요청▲▼컨트롤러에대한정보	▲ ▼			mybatis
+고객		▶	   DispatcherServlet				▲	▼
+		◀			   ▼▶	View Resolver		DBMS(oracle)
+			   ▲ ▼		 ▲◀
+			View(jsp)								
+
+https://devpad.tistory.com/24 참고
+DispatcherServlet은 controller가 반환하는것이 어떤값인지 몰라
+View Resolver를 통해 해석
+
+기존과 차이점은 service는 dao와 비슷하지만 transaction작업 구현을 이곳에서하고
+
+dao에서 하던 sql 작업을 mybatis에서 한다.
+
+실직적으로 자주 구현하는것들
+controller(command Class)
+service(transaction구현)
+dao
+mybatis(sql 작업)
+view(jsp)
+======================================================================================================
+pom.xml을 통한 dependancy 추가방법(maven을 통해 파일을 내려받는법)
+받을것 
+mybatis 3.2.8
+mybatis-spring 1.2.2	
+spring-jdbc
+spring-test
+
+버전이 안나온것들은 스프링사용하는 버전인 4.2.1 
+${org.springframework-version}코드를 버전에 넣어도 된다.
+https://mvnrepository.com/
+가장유명한 사이트
+
+이곳에서 dependency 코드를 찾아 pom.xml dependencies에 넣는다.
+======================================================================================================
+jdbc관리 root-context에서 하는데
+root-context의 namespace tab
+aop/context/jdbc/mybatis/tx/추가하고 저장
+
+maven에 있는
+org.springframework.jdbc.datasource
+의 
+DriverManagerDataSource.class
+copy q~name
+org.springframework.jdbc.datasource.DriverManagerDataSource.class
+.class제거하고 bean의 class로 넣어 bean 작성하여 객체생성
+4가지 property 추가(driverclassname/url/username/password)
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<property value="oracle.jdbc.driver.OracleDriver" name="driverClassName"></property>
+<property value="jdbc:oracle:thin:@localhost:1521:xe" name="url"></property>
+<property value="ca5" name="username"></property>
+<property value="ca5" name="password"></property>
+</bean>
+
+======================================================================================================
+mybatis 환경설정
+
+maven에있는
+mybatis-spring의 org.mybatis.spring에있는 sqlsessionfactorybean
+
+property 객체참조할떄는ref 문자를참조하면string
+property name = datasource는 위에서 작성한 datasource객체참조
+
+<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+<property name="dataSource" ref="dataSource"></property>
+</bean>
+---------------
+작성후 src/main/resources에 mybatis-config.xml 생성
+mybatis-config.xml검색하여
+https://mybatis.org/mybatis-3/ko/getting-started.html접속
+xml에서 sqlsessionfacory빌드하기 코드 복사하여 넣고 저장(단 configuration안에 있는 코드는 지워준다.)
+
+configuration 내부 작성내용
+<typeAliases>
+		<package name="kr.co.domain"/> <--이처럼 한번 작성하거나
+		<typeAlias alias="MemberDTO" (type="kr.co.domain.MemberDTO"생략가능)/> <--이를 패키지안 클래스마다 작성
+</typeAliases>
+--------------
+property로 mybatis 환경설정파일의 위치를 알려준다
+<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+
+======================================================================================================
+jdbc연결 잘되었는지 테스트
+src/test/java에 클래스성성
+@runwith 어노테이션 붙이고 @RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration 어노테이션도 붙인다.
+	file:(/World/제거)src/main/webapp/WEB-INF/spring/(root-context.xml servletcontext까지 
+	고려하면 /**/*.xml로 대체 하는 경우도 있다.)
+	@ContextConfiguration(locations = {"file:/src/main/webapp/WEB-INF/spring/**/*.xml"})
+
+class안쪽에
+@Auotowired(==@Inject) 어노테이션 적용
+	private DataSource dataFactory; 변수선언
+	기존까지는 이렇게 선언하면 datafactory는 null이었지만								autowired가 springframework가 관리하는 bean을 자동으로 넣어준다
+@Test
+테스트할 메소드에는 test어노테이션을 반드시 붙여준다.
+반환형은 반드시 void 파라미터는 반드시 없어야 한다.
+
+테스트시 모든 메서드를 테스트하려면 그냥 우클릭을통해 하고 특정 메소드만 하고 싶다면 메소드이름을 드래그 한 후 runas junit
+
+======================================================================================================
+Mybatis연결 잘되었는지 테스트
+위와 동일
+단 connnection대신 session
+datafactory대신 SqlSessionFactory sqlFactory
+session 연결은 sqlFactory의 openSession method
+
+======================================================================================================
+참고 -https://sjh836.tistory.com/130
+Mybatis - spring 연동
+
+src/main/resources 에 mappers 폴더 만들고 mapper파일들을 모아준다.
+우선 xml file생성
+memberMapper.xml//xxxMapper.xml로 생성해야한다.
+mapper.xml파일들의 이름은 다 xxMapper.xml로 생성(*Mapper.xml을통해 mapper로 구분/아래 root-context 매퍼location설정)
+
+
+mybatis-config.xml검색하여
+https://mybatis.org/mybatis-3/ko/getting-started.html접속
+매핑된 sql구문살펴보기의 코드 복사하여 memberMapper.xml에 붙여넣기
+
+
+namespace는 id가 같을 경우 구분해준다.
+이는 호출할떄 namespace.id 로 호출
+resulttype에 해당하는 클래스가 미리 지정한 이곳(mybatis-config.xml에서 설정)에서는 domain에 존재해야 한다.
+
+매퍼파일에서 sql문,namespace,id,resultType을 수정하고 저장
+select * from member같은 sql문을 실행하더라도 list타입으로 받지 않고 generic타입으로 받는다.
+
+root-context에 매퍼폴더 위치 설정
+<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+mappers폴더안의 어떤폴더인지 상관없이 xxxMapper.xml이면 mapper로 인식하도록 해주는 설정
+
+<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+<property name="dataSource" ref="dataSource"></property>
+<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+</bean>
+
+
+======================================================================================================
+sqlSessionTemplates 클래스 활용 연동 - 위와 연계하여
+
+bean생성
+id = sqlSession 
+class는 mybatis-spring의 mybatis.spring.sqlsessiontemplates를 넣어준다
+id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"
+<constructor-arg name="sqlSessionFactory">객체생성
+sqlsessionfactory는 바로 위 매퍼설정하면서 작성했던 sqlsessionfactory의 객체를 가져온다
+
+<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory">
+</constructor-arg>
+</bean>
+
+이 기능이
+session.insert
+session.selectlist등으로 짧게 사용 가능하게 만들어준다.
+======================================================================================================
+kr.co.persistence(dao)
+kr.co.service
+객체 생성
+persistence와 service도
+controller처럼
+@repository/@service어노테이션을 붙이고
+root-context에 component-scan설정을해서 객체를 생성한다.
+
+======================================================================================================
+MemberController 생성
+
+@RequestMapping("member")어노테이션을 사용하여 컨트롤러를 좀 더 특정할 수 있다. 이떄 member는 /member로 써도 상관없다.
+member/insert 등을 사용할 수 있게 만들어줌
+
+스프링객체가 가지고 있는 bean을 바로 사용하기 위해선
+@inject/@autowired를 사용한다.
+	private MemberService memberService;
+spring은 인터페이스기반이기에 memberservice인터페이스를 생성해준다.
+이를 구현하는 클래스의 이름은 보통 인터페이스와 동일하게적고 +impl을 붙여준다
+즉memberserviceimpl
+그리고 이곳에 @service어노테이션을 붙여준다.
+service인터페이스를 구현한 클래스에 @service어노테이션이 없다면 service객체를 사용하는 곳에 있는  inject/autowired어노테이션이 memberservice객체를 가져오지 못한다.
+
+dao클래스(repository)도 동일하게 적용한다.
+하지만 dao는 service를 통해 작동하기에
+service인터페이스를 구현한 클래스에 객체를 생성해서 사용한다.
+
+======================================================================================================
+
+table생성
+
+create table member(
+id varchar2(4) primary key,
+name varchar2(21) not null,
+age number(3) default 0
+);
+======================================================================================================
+/member/insert.jsp
+
+form tag value=/member/insert method=post
+->405에러
+membercontroller에
+post방식의 method를 하나 더 만들어 준다.
+정보들을 string string int type으로 받아도 가능하지만
+memberdto를 파라미터에 넣어서 받을 수 도 있다.
+->controller<->service
+컨트롤러에서 service를불러와 insert method생성
+->service <-> dao
+service interface에 insert method 생성
+serviceimpl calss 에서 overriding
+그 method를 통해 dao를 불러와 method생성
+
+dao interfaceimpl에서 구현
+여기서는
+sqlSession 객체는 root-context에서 이미 만들어 놨으니 @autowired/@inject 어노테이션을 이용 사용해준다.
+method안에 session.insert(statement,parameter);
+인데 statement는 mapper에서 insert tag안에 있는 id
+단 반드시 namespace를 이용해줘야한다.
+이는 dao에서 상수로 처리해 같은 dao내 한번만 사용해준다
+
+
+mapper
+<insert></insert>
+내부에 sql문을 작성 기존?,?,?대신
+#{},#{},#{}사용 중괄호 내부에는 변수명을 기입
+dto를 받았다면 dto의 속성명을 그대로 적으면 된다.
+ex)id,name,age -> 이는 각각 dto.getId dto.getName, dto.getAge를의미 dtoclass에 getmethod없으면 사용 불가
+
