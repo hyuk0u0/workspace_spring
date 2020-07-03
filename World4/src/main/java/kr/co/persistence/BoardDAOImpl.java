@@ -62,4 +62,10 @@ public class BoardDAOImpl implements BoardDAO {
 		// TODO Auto-generated method stub
 		session.update(NS + ".update", vo);
 	}
+	
+	@Override
+	public void delete(int bno) {
+		// TODO Auto-generated method stub
+		session.delete(NS + ".delete", bno);
+	}
 }

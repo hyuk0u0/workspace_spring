@@ -62,4 +62,11 @@ public class BoardController {
 		boardService.update(vo);
 		return "redirect:/board/read/" + vo.getBno();
 	}
+	
+	@RequestMapping(value = "/delete/{bno}", method = RequestMethod.GET)
+	public String delete(@PathVariable("bno") int bno) {
+		boardService.delete(bno);
+		
+		return "redirect:/board/list";
+	}
 }

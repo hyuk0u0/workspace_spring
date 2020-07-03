@@ -17,4 +17,6 @@ public interface BoardDAO {
 	BoardVO updateUI(int bno);
 
 	void update(BoardVO vo);
+
+	void delete(int bno);
 }

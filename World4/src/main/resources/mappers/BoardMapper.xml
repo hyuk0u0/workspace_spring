@@ -30,4 +30,8 @@
 	<update id="update">
 		update board set title = #{title}, content = #{content}, writer = #{writer}, updatedate = sysdate where bno = #{bno}
 	</update>
+	
+	<delete id="delete">
+		delete from board where bno = #{bno}
+	</delete>
 </mapper>

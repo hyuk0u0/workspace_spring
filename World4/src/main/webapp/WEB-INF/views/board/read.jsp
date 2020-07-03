@@ -55,7 +55,7 @@
 			});
 
 			$("#delete").click(function(){
-				location.assign("/board/delelte/${vo.bno}");
+				location.assign("/board/delete/${vo.bno}");
 			});
 
 			$("#list").click(function(){
