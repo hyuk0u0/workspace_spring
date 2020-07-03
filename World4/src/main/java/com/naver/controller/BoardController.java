@@ -46,4 +46,13 @@ public class BoardController {
 		model.addAttribute("vo", vo);
 		return "/board/read";
 	}
+	
+	@RequestMapping(value = "/update/{bno}", method = RequestMethod.GET)
+	public String update(Model model, @PathVariable("bno") int bno) {
+		
+		BoardVO vo = boardService.updateUI(bno);
+		model.addAttribute("vo", vo);
+		
+		return "/board/update";
+	}
 }

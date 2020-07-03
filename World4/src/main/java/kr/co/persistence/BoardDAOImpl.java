@@ -50,4 +50,10 @@ public class BoardDAOImpl implements BoardDAO {
 		session.update(NS + ".increaseViewcnt", bno);
 		
 	}
+	
+	@Override
+	public BoardVO updateUI(int bno) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NS + ".updateUI", bno);
+	}
 }

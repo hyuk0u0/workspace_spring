@@ -11,4 +11,6 @@ public interface BoardService {
 	List<BoardVO> list();
 
 	BoardVO read(int bno);
+
+	BoardVO updateUI(int bno);
 }

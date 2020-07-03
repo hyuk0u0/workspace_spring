@@ -31,4 +31,10 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.increaseViewcnt(bno); // 조회수 늘리기!
 		return boardDAO.read(bno);
 	}
+	
+	@Override
+	public BoardVO updateUI(int bno) {
+		// TODO Auto-generated method stub
+		return boardDAO.updateUI(bno);
+	}
 }
