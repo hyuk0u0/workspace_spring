@@ -2,8 +2,8 @@ package kr.co.domain;
 
 import java.io.Serializable;
 
-public class BoardDTO implements Serializable {
-
+public class BoardVO implements Serializable{
+	
 	/**
 	 * 
 	 */
@@ -12,22 +12,22 @@ public class BoardDTO implements Serializable {
 	private String title;
 	private String content;
 	private String writer;
-	private int viewCnt;
+	private int viewcnt;
 	private String regDate;
 	private String updateDate;
 	
-	public BoardDTO() {
+	public BoardVO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BoardDTO(int bno, String title, String content, String writer, int viewCnt, String regDate,
+	public BoardVO(int bno, String title, String content, String writer, int viewcnt, String regDate,
 			String updateDate) {
 		super();
 		this.bno = bno;
 		this.title = title;
 		this.content = content;
 		this.writer = writer;
-		this.viewCnt = viewCnt;
+		this.viewcnt = viewcnt;
 		this.regDate = regDate;
 		this.updateDate = updateDate;
 	}
@@ -64,12 +64,12 @@ public class BoardDTO implements Serializable {
 		this.writer = writer;
 	}
 
-	public int getViewCnt() {
-		return viewCnt;
+	public int getViewcnt() {
+		return viewcnt;
 	}
 
-	public void setViewCnt(int viewCnt) {
-		this.viewCnt = viewCnt;
+	public void setViewcnt(int viewcnt) {
+		this.viewcnt = viewcnt;
 	}
 
 	public String getRegDate() {
@@ -108,7 +108,7 @@ public class BoardDTO implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BoardDTO other = (BoardDTO) obj;
+		BoardVO other = (BoardVO) obj;
 		if (bno != other.bno)
 			return false;
 		return true;
@@ -116,9 +116,10 @@ public class BoardDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "BoardDTO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer
-				+ ", viewCnt=" + viewCnt + ", regDate=" + regDate + ", updateDate=" + updateDate + "]";
+		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", viewcnt="
+				+ viewcnt + ", regDate=" + regDate + ", updateDate=" + updateDate + "]";
 	}
+	
 	
 	
 	
