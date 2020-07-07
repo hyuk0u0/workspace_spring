@@ -29,4 +29,16 @@ public class ReplyDAOImpl implements ReplyDAO {
 		// TODO Auto-generated method stub
 		return session.selectList(NS + ".list", bno);
 	}
+	
+	@Override
+	public int update(ReplyVO vo) {
+		// TODO Auto-generated method stub
+		return session.update(NS + ".update", vo);
+	}
+	
+	@Override
+	public int delete(int rno) {
+		// TODO Auto-generated method stub
+		return session.delete(NS + ".delete", rno);
+	}
 }

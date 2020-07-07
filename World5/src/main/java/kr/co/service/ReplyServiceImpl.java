@@ -28,4 +28,17 @@ public class ReplyServiceImpl implements ReplyService {
 		return replyDAO.list(bno);
 	}
 	
+	@Override
+	public int update(ReplyVO vo) {
+		// TODO Auto-generated method stub
+		return replyDAO.update(vo);
+	}
+	
+	
+	@Override
+	public int delete(int rno) {
+		// TODO Auto-generated method stub
+		return replyDAO.delete(rno);
+	}
+	
 }

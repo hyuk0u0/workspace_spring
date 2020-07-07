@@ -36,4 +36,25 @@ public class MyRestController {
 		return  list;
 	}
 	
+	@RequestMapping(value = "/replies/{rno}", method = RequestMethod.PUT)
+	public String update(@PathVariable("rno") int rno, @RequestBody ReplyVO vo) {
+		vo.setRno(rno);
+		int i = replyService.update(vo);
+		
+		if (i == 1) {
+			return "success";
+		}
+		return "fail";
+	}
+	
+	@RequestMapping(value = "/replies", method = RequestMethod.DELETE)
+	public String delete(@RequestBody ReplyVO vo) {
+		int i = replyService.delete(vo.getRno());
+		
+		if (i == 1) {
+			return "success";
+		}
+		return "fail";
+	}
+
 }

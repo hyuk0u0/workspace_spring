@@ -69,21 +69,40 @@
   				</div>
   				<div class="panel-body">
   					<p>댓글 내용입니다.</p>
-  					<button class="btn btn-primary btn-xs">수정</button>
+  					<button data-name="홍길동" class="btn btn-primary btn-xs">수정</button>
   					<button class="btn btn-primary btn-xs">삭제</button>
   				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div data-backdrop="static" id="myModal" class="modal fade" tabindex="-1" role="dialog"> <!-- data-backdrop="static" 클로즈 눌렀을때만 모달이 꺼짐 -->
+				<div class="modal-dialog" role="document">
+			  		<div class="modal-content">
+			    		<div class="modal-header">
+			      			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			      			<h4 class="modal-rno">rno 데이터</h4>
+			    		</div>
+			    		<div class="modal-body">
+			    			<p class="modal-replyer">홍길동</p>
+			     	 		<input class="modal-replytext form-control" value="댓글내용입니다."/>
+			   	 		</div>
+			  	  		<div class="modal-footer">
+			      			<button type="button" class="btn btn-primary modal-update-btn" data-dismiss="modal">댓글 수정</button>
+			    		</div>
+			  		</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+		</div>
 	</div>
 	
 	<script type="text/javascript">
-	
+		
 		var bno = ${vo.bno};
 
 		getList(bno); <!-- 곧바로 실행됨! -->
 		
 		$(document).ready(function(){
-			
+	
 			$("#update").click(function(){
 				location.assign("/board/update/${vo.bno}");
 			});
@@ -131,13 +150,67 @@
 
 			$("#replies").on("click", ".replymodify", function(){
 				var rno = $(this).attr("data-rno")  <!-- 지금 클릭한 요소의 속성값 -->
-				
+				var replyer = $(this).attr("data-name");
+				var replytext = $(this).prev().text(); <!-- 방금 누른 버튼의 앞에놈을 가르킴 -->
+
+				$(".modal-rno").text(rno);
+				$(".modal-replyer").text(replyer);
+				$(".modal-replytext").val(replytext);
+
+				$("#myModal").modal("show");
 			});
 
 			$("#replies").on("click", ".replydelete", function(){
 				var rno = $(this).attr("data-rno")  <!-- 지금 클릭한 요소의 속성값 -->
-				alert(rno + "삭제버튼");
+
+				$.ajax({
+					type : 'delete',
+					url : '/replies',
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "DELETE"
+					}, 
+					dataType : 'text',
+					data : JSON.stringify({
+						rno : rno
+					}),
+					success : function(result) {
+						if(result === "success") {
+							getList(bno);
+						}
+					},
+					error : function(request, status, error) {
+						console.log(error);
+					}
+				});
 			});
+
+			$(".modal-update-btn").click(function(){
+				var rno = $(".modal-rno").text();
+				var replytext = $(".modal-replytext").val();
+
+				$.ajax({
+					type : 'put',
+					url : '/replies/' + rno,
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "PUT"
+					},
+					dataType : 'text',
+					data : JSON.stringify({
+						replytext : replytext
+					}),
+					success : function(result){
+						if(result === "success") { <!-- 자바스크립트에서 === 값과 타입이 같아야 true-->
+							getList(bno);
+						} 
+					},
+					error : function(request, status, error) {
+						console.log(error);
+					}
+				});
+			});
+			
 		}); 
 
 		function getList(bno){
@@ -147,7 +220,7 @@
 			$.getJSON("/replies/all/" + bno, function(data){
 				
 				for(var i = 0; i < data.length; i++) { <!-- 파싱해버리기! 데이터 쪼개기 -->
-					str += '<div class="panel panel-primary"><div class="panel-heading"><span>rno: ' + data[i]["rno"] + '</span>, <sapn>작성자: ' + data[i]["replyer"] + '</sapn><span class="pull-right"> ' + data[i]["updatedate"] + '</span></div><div class="panel-body"><p>' + data[i]["replytext"] + '</p><button data-rno="' + data[i]["rno"] + '" class="btn btn-primary btn-xs replymodify">수정</button><button data-rno="' + data[i]["rno"] + '" class="btn btn-primary btn-xs replydelete">삭제</button></div></div>'; 		
+					str += '<div class="panel panel-primary"><div class="panel-heading"><span>rno: ' + data[i]["rno"] + '</span>, <sapn>작성자: ' + data[i]["replyer"] + '</sapn><span class="pull-right"> ' + data[i]["updatedate"] + '</span></div><div class="panel-body"><p>' + data[i]["replytext"] + '</p><button data-name"' + data[i]["replyer"] + '" data-rno="' + data[i]["rno"] + '" class="btn btn-primary btn-xs replymodify">수정</button>&nbsp;<button data-rno="' + data[i]["rno"] + '" class="btn btn-primary btn-xs replydelete">삭제</button></div></div>'; 		
 				}
 
 				$("#replies").html(str);
