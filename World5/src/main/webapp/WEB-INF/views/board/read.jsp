@@ -61,12 +61,29 @@
 				</div>
 			</div>
 		</div>
+		<div id="replies" class="row"> <!-- 자바스크립트로 덮어쓰기 해버렸음 -->
+			<div class="panel panel-primary">
+  				<div class="panel-heading">
+  					<span>rno: 3</span>, <sapn>작성자: 홍길동</sapn>
+  					<span class="pull-right">2020년 07월07일...</span>
+  				</div>
+  				<div class="panel-body">
+  					<p>댓글 내용입니다.</p>
+  					<button class="btn btn-primary btn-xs">수정</button>
+  					<button class="btn btn-primary btn-xs">삭제</button>
+  				</div>
+			</div>
+		</div>
 	</div>
 	
 	<script type="text/javascript">
+	
 		var bno = ${vo.bno};
+
+		getList(bno); <!-- 곧바로 실행됨! -->
 		
 		$(document).ready(function(){
+			
 			$("#update").click(function(){
 				location.assign("/board/update/${vo.bno}");
 			});
@@ -86,8 +103,57 @@
 			$("#replyInsertBtn").click(function(){
 				var replyer = $("#replyer").val();
 				var replytext = $("#replytext").val();
+
+				$.ajax({
+					type : 'post',
+					url : '/replies',
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "POST"
+					},
+					dataType : 'text',
+					data : JSON.stringify({
+						bno : bno,
+						replyer : replyer,
+						replytext : replytext
+					}),
+					success : function(result){
+						$("#replyer").val(""); <!-- 글을 입력한뒤 비게하려구!  -->
+						$("#replytext").val("");
+
+						getList(bno); <!-- 곧바로 추가되게 -->
+					},
+					error : function(request, status, error) {
+						console.log(error);
+					}
+				});
+			});
+
+			$("#replies").on("click", ".replymodify", function(){
+				var rno = $(this).attr("data-rno")  <!-- 지금 클릭한 요소의 속성값 -->
+				
+			});
+
+			$("#replies").on("click", ".replydelete", function(){
+				var rno = $(this).attr("data-rno")  <!-- 지금 클릭한 요소의 속성값 -->
+				alert(rno + "삭제버튼");
 			});
 		}); 
+
+		function getList(bno){
+
+			var str = '';
+			
+			$.getJSON("/replies/all/" + bno, function(data){
+				
+				for(var i = 0; i < data.length; i++) { <!-- 파싱해버리기! 데이터 쪼개기 -->
+					str += '<div class="panel panel-primary"><div class="panel-heading"><span>rno: ' + data[i]["rno"] + '</span>, <sapn>작성자: ' + data[i]["replyer"] + '</sapn><span class="pull-right"> ' + data[i]["updatedate"] + '</span></div><div class="panel-body"><p>' + data[i]["replytext"] + '</p><button data-rno="' + data[i]["rno"] + '" class="btn btn-primary btn-xs replymodify">수정</button><button data-rno="' + data[i]["rno"] + '" class="btn btn-primary btn-xs replydelete">삭제</button></div></div>'; 		
+				}
+
+				$("#replies").html(str);
+				
+			});
+		}
 	</script>
 </body>
 </html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="r.e.p">
+	<insert id="insert">
+		<![CDATA[insert into reply (rno, bno, replyer, replytext) values (#{rno}, #{bno}, #{replyer}, #{replytext})]]>
+	</insert>
+	
+	<select id="getRno" resultType="Integer">
+		<![CDATA[select NVL2(max(rno), max(rno) + 1, 1) from reply]]>
+	</select>
+	
+	<select id="list" resultType="ReplyVO">
+		select * from reply where bno = #{bno} order by rno desc
+	</select>
+</mapper>
