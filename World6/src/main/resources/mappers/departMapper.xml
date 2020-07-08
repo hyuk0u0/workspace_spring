@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="d.e.p">
+	<insert id="insert">
+		insert into depart (did, dname) values (#{did}, #{dname})
+	</insert>
+
+	<select id="list" resultType="DepartDTO">
+		select * from depart
+	</select>
+	
+	<select id="read" resultType="DepartDTO">
+		select * from depart where did = #{did}
+	</select>
+	
+	<select id="updateui" resultType="DepartDTO">
+		select * from depart where did = #{did}
+	</select>
+	
+	<update id="update">
+		update depart set dname = #{dname} where did = #{did}
+	</update>
+	
+	<delete id="delete">
+		delete from depart where did = #{did}
+	</delete>
+</mapper>
