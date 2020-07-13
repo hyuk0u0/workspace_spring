@@ -2,8 +2,8 @@ package kr.co.domain;
 
 import java.io.Serializable;
 
-public class BoardDTO implements Serializable{
-
+public class BoardVO implements Serializable{
+	
 	/**
 	 * 
 	 */
@@ -15,7 +15,28 @@ public class BoardDTO implements Serializable{
 	private int viewcnt;
 	private String regDate;
 	private String updateDate;
-	public BoardDTO(int bno, String title, String content, String writer, int viewcnt, String regDate,
+	private String[] files;
+	
+	public BoardVO() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public BoardVO(int bno, String title, String content, String writer, int viewcnt, String regDate,
+			String updateDate, String[] files) {
+		super();
+		this.bno = bno;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.viewcnt = viewcnt;
+		this.regDate = regDate;
+		this.updateDate = updateDate;
+		this.files = files;
+	}
+	
+	
+
+	public BoardVO(int bno, String title, String content, String writer, int viewcnt, String regDate,
 			String updateDate) {
 		super();
 		this.bno = bno;
@@ -25,10 +46,6 @@ public class BoardDTO implements Serializable{
 		this.viewcnt = viewcnt;
 		this.regDate = regDate;
 		this.updateDate = updateDate;
-	}
-	
-	public BoardDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getBno() {
@@ -86,6 +103,17 @@ public class BoardDTO implements Serializable{
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
+	
+
+
+
+	public String[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -107,7 +135,7 @@ public class BoardDTO implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BoardDTO other = (BoardDTO) obj;
+		BoardVO other = (BoardVO) obj;
 		if (bno != other.bno)
 			return false;
 		return true;
@@ -115,8 +143,8 @@ public class BoardDTO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "BoardDTO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer
-				+ ", viewcnt=" + viewcnt + ", regDate=" + regDate + ", updateDate=" + updateDate + "]";
+		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", viewcnt="
+				+ viewcnt + ", regDate=" + regDate + ", updateDate=" + updateDate + "]";
 	}
 	
 	
