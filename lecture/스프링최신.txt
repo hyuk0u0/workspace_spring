@@ -198,3 +198,33 @@ Mapper.xml
 
 ===============================================================
 
+지금까지 추가된 테이블 목록 
+
+ create table member(
+  2  id varchar2(4) primary key,
+  3  name varchar2(21) not null,
+  4  age number(3) default 0
+  5  );
+
+create table board(
+bno number primary key,
+title varchar2(100) not null,
+content varchar2(3000) not null,
+writer varchar2(21) not null,
+viewcnt number default 0,
+regDate date default sysdate,
+updateDate date default sysdate
+);
+
+create table attach(
+
+id number primary key,
+
+fullname varchar2(200) not null,
+
+bno number references board(bno),
+
+regdate date default sysdate
+
+); 
+// 디디디디디디ㅣ디디디디디디

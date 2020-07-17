@@ -1,0 +1,92 @@
+쓰레드
+새로운 실행 흐름
+스택은 공유 안되고 클래스 heap은 공유가 된다
+
+1. 사용자 쓰레드 생성
+쓰레드 클래스를 상속하는 자식 클래스를 만듦
+
+2. 사용자 스레드에서 실행할 코드를 자식 클래스의
+run() 메서드에 작성
+
+3. 자식 클래스를 이용해서
+스레드 객체를 만듦
+
+4. 스레드 객체가 갖고 있는
+start()메서드를 호출.
+
+=====> 쓰레드 생성됨
+대기	runnable 
+실행	running
+더이상 실행할 메서드가 없으면 dead
+
+java는 단일상속을 원칙으로 한다
+단, interface는 예외...
+
+imlements inter1, inter2
+
+public class Cclass impements inter1, inter2 {
+
+}
+
+public interface Cinter extends Inter1, Inter2 {
+
+}
+
+public class Unit{
+
+}
+
+public class Tank extends unit implements () {
+
+}
+
+1. UserRunnable 클래스 생성. 단, Runnable 인터페이스 구현
+2. run()메서드에 사용자 스레드에서 실행할 코드를 작성
+3. UserRunnable 클래스를 이용해서 runnable 객체를 만듦
+4. Thread 클래스를 이용해서 스레드 객체 만듦(runnable객체를 파람으로 넣음)
+5. 스레드 객체가 갖고있는 start()메서드 호출
+======스레드 생성
+	runnable
+	running
+	dead
+
+thread에 우선 순위를 지정할 수 있는데
+100% 보장을 못함..
+
+thread에 우선 순위를 지정할 수 있는 join() 메서드
+ 
+ut1 스레드가 항상 main스레드보다 작업이 일찍 끝나게 하겠습니다.
+
+메인스레드의 영역에서 호출해줘야함 join()메서드
+
+
+
+my스레드가 항상 you스레드보다 작업이 일찍 끝나게 하겠습니다.
+어디에서 join()메서드 호출? UserRunnable1클래스에서!
+
+=====내부클래스
+member inner class
+static inner class
+local inner class 
+anunymous inner class
+
+
+
+
+
+
+
+
+동기화문제 해결방법 
+1. 동기화 메서드: 속도가딸림 키는 하나인데! 
+2. 동기화 블럭: 얘는 여러개를 할수있어 그래서 더빠름
+
+같은 데이터에 관해서는 열쇠가 똑같아야 동기화문제가 안일어남
+
+
+접근 순서의 동기화
+
+setDaemon();
+메인 스레드가 끝나면 나머지도 다른 스레드도 다 작업종료
+
+
