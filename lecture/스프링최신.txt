@@ -228,7 +228,4 @@ bno number references board(bno),
 regdate date default sysdate
 
 ); 
-// 디디디디디디ㅣ디디디디디디
-=======
-/////이이이이이이
->>>>>>> fetch_head
+

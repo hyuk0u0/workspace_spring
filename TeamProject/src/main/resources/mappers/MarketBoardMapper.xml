@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="m.b.o">
+	<select id="boardList" resultType="MarketBoardCategoryDTO">
+		select * from board natural join category
+	</select>
+	
+	<select id="boardRead" resultType="MarketBoardCategoryToyDTO">
+		select * from board natural join toy natural join category where bno = #{bno}
+	</select>
+	
+	<select id="getUpload" resultType="string">
+		select fullName from upload where bno = #{bno}
+	</select>
+	
+	<insert id="purchase">
+		insert into purchase_board (pno, id, cno, gno, deliveryCode) values (#{pno}, #{id}, #{cno}, #{gno}, #{deliveryCode})
+	</insert>
+	
+		<select id="getPno" resultType="Integer">
+			select max(pno) from purchase_board
+	</select>
+</mapper>

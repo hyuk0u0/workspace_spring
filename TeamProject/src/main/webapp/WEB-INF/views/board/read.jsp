@@ -241,7 +241,7 @@
 			});
 
 			$.getJSON("/getAttach/" + bno, function(arr) {
-				console.log(arr[0]);
+
 				for(var i = 0; i < arr.length; i++) {
 					
 				var str = '<li class="col-xs-4">';
@@ -252,9 +252,7 @@
 					str += '<img src="/resources/show.png"/>';
 				}						
 				str += '</a>';
-				str += '<p class="orifilename">';
-				str += getOriginalName(arr[i]);
-				str += '</p>';
+				
 				str += '</li>';
 			
 				
