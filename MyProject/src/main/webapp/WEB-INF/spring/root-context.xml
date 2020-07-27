@@ -18,8 +18,8 @@
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property value="oracle.jdbc.driver.OracleDriver" name="driverClassName"></property>
 		<property value="jdbc:oracle:thin:@localhost:1521:xe" name="url"></property>
-		<property value="ca5" name="username"></property>
-		<property value="ca5" name="password"></property>
+		<property value="ca13" name="username"></property>
+		<property value="ca13" name="password"></property>
 	</bean>
 	
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
