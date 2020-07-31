@@ -1,0 +1,80 @@
+create table member (
+userId varchar2(100) primary key,
+userPw varchar2(100) not null,
+userName varchar2(100) not null
+);
+
+create table board (
+bno number(3) primary key,
+title varchar2(300) not null,
+content varchar2(3000),
+writer varchar2(100) not null,
+viewCnt number(4) default 0,
+regDate date default sysdate,
+updateDate date
+);
+
+create table attach(
+ano number primary key,
+filename varchar2(200) not null,
+bno number references board(bno),
+regdate date default sysdate
+);
+
+	
+
+팀플젝
+
+create table category(
+cno number primary key,
+cname varchar2(20) not null
+)
+
+insert into category (cno, cname) values (1, 'toy');
+insert into category (cno, cname) values (2, 'clothes');
+insert into category (cno, cname) values (3, 'stroller');
+insert into category (cno, cname) values (4, 'food');
+
+create table goods(
+gno number primary key,
+cno number references category (cno),
+gname varchar2(100) not null,
+price number default 0
+)
+
+insert into goods (gno, cno, gname, price) values (1, 1, '꼬마자동차', 15000);
+insert into goods (gno, cno, gname, price) values (2, 2, '반바지', 20000);
+insert into goods (gno, cno, gname, price) values (3, 3, '검은유모차', 17000);
+insert into goods (gno, cno, gname, price) values (4, 4, '이유식', 30000);
+
+create table board(
+bno number primary key,
+title varchar2(100) not null,
+cno number references category (cno),
+gno number references goods (gno),
+regDate date default sysdate
+)
+
+create table attach(
+uno number primary key,
+bno number references board (bno),
+fullName varchar2(200) not null
+)
+
+create table purchase_board(
+pno number primary key,
+id references member(id),
+cno number references category (cno),
+gno varchar2(100),
+deliveryCode varchar2(100) not null,
+purDate date default sysdate
+)
+
+create table member(
+id varchar2(20) primary key,
+pw varchar2(20) not null,
+uname varchar2(20) not null,
+phone number(15) not null,
+addr varchar2(100) not null,
+authority varchar2(30) default 'consumer'
+);
