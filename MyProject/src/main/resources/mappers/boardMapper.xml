@@ -3,5 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="b.o.a">
+	<delete id="deleteAttachByFileName">
+		delete from attach where filename = #{filename}
+	</delete>
 	
+	<select id="getBno" resultType="Integer">
+		select max(bno) from board
+	</select>
+	
+	<insert id="insert">
+		insert into board (bno, title, writer, content) values (#{bno}, #{title}, #{writer}, #{content})
+	</insert>
+	
+	<select id="getAno" resultType="Integer">
+		select NVL2(max(ano), max(ano) + 1, 1) from attach
+	</select>
+	
+	<insert id="addAttach">
+		insert into attach (ano, filename, bno) values (#{ano}, #{filename}, #{bno})
+	</insert>
+	
+	<select id="getMember" resultType="MemberDTO">
+		select * from member where userId = #{userId}
+	</select>
 </mapper>

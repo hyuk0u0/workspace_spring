@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public MemberDTO loginPost(LoginDTO login) {
+	public LoginDTO loginPost(LoginDTO login) {
 		// TODO Auto-generated method stub
 		return memberDAO.loginPost(login);
 	}

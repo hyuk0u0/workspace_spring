@@ -12,6 +12,7 @@ public class BoardDTO implements Serializable{
 	private int bno;
 	private String title;
 	private String writer;
+	private String content;
 	private int viewCnt;
 	private String regDate;
 	private String updateDate;
@@ -21,17 +22,34 @@ public class BoardDTO implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public BoardDTO(int bno, String title, String writer, int viewCnt, String regDate, String updateDate,
-			String[] files) {
+	
+
+	public BoardDTO(int bno, String title, String writer, String content, int viewCnt, String regDate,
+			String updateDate, String[] files) {
 		super();
 		this.bno = bno;
 		this.title = title;
 		this.writer = writer;
+		this.content = content;
 		this.viewCnt = viewCnt;
 		this.regDate = regDate;
 		this.updateDate = updateDate;
 		this.files = files;
 	}
+
+	
+
+	public String getContent() {
+		return content;
+	}
+
+
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
 
 	public int getBno() {
 		return bno;
@@ -115,11 +133,16 @@ public class BoardDTO implements Serializable{
 		return true;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "BoardDTO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", viewCnt=" + viewCnt
-				+ ", regDate=" + regDate + ", updateDate=" + updateDate + ", files=" + Arrays.toString(files) + "]";
+		return "BoardDTO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", content=" + content
+				+ ", viewCnt=" + viewCnt + ", regDate=" + regDate + ", updateDate=" + updateDate + ", files="
+				+ Arrays.toString(files) + "]";
 	}
+
+	
 	
 	
 	

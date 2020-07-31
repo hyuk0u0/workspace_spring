@@ -12,7 +12,7 @@ public interface MemberDAO {
 	
 	void update(MemberDTO dto);
 
-	MemberDTO loginPost(LoginDTO login);
+	LoginDTO loginPost(LoginDTO login);
 
 	MemberDTO myPage(String userId);
 

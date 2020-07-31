@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="m.e.m">
+	<select id="idChk" resultType="int">
+		select count(*) from member where id = #{id}
+	</select>
+	
+	<insert id="register">
+		insert into member (id, pw, uname, phone, addr) values (#{id}, #{pw}, #{uname}, #{phone}, #{addr})
+	</insert>
+	
+	<select id="loginPost" resultType="LoginDTO">
+		select * from member where id = #{id} and pw = #{pw}
+	</select>
+	
+	<select id="myPage" resultType="MemberDTO">
+		select * from member where id = #{id}
+	</select>
+	
+	<update id="update">
+		update member set pw = #{pw}, uname = #{uname}, phone = #{phone}, addr = #{addr} where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from member where id = #{id}
+	</delete>
+</mapper>

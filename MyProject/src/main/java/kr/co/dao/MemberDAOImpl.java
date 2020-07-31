@@ -35,7 +35,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public MemberDTO loginPost(LoginDTO login) {
+	public LoginDTO loginPost(LoginDTO login) {
 		// TODO Auto-generated method stub
 		return session.selectOne(NS + ".loginPost", login);
 	}

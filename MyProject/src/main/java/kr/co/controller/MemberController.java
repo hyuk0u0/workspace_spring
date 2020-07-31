@@ -74,7 +74,7 @@ public class MemberController {
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public String login(LoginDTO login, Model model, HttpSession session) {
 		
-		MemberDTO dto = memberService.loginPost(login);
+		LoginDTO dto = memberService.loginPost(login);
 		
 		if (dto != null) {
 			model.addAttribute("login", dto);

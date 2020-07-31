@@ -19,7 +19,7 @@
 		delete from member where userId = #{userId}
 	</delete>
 	
-	<select id="loginPost" resultType="MemberDTO">
+	<select id="loginPost" resultType="LoginDTO">
 		select * from member where userId = #{userId} and userPw = #{userPw}
 	</select>
 	
