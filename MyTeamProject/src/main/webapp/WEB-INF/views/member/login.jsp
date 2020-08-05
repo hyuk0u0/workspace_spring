@@ -16,6 +16,9 @@
 	<title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="../board/header.jsp"/>
+	
+
 	<div class="container">
 		<div class="row">
 			<form action="/member/loginPost" method="post" id="loginForm">
@@ -38,6 +41,7 @@
 		</div>
 	</div>
 	
+	<jsp:include page="../board/footer.jsp"/>
 	
 	<script type="text/javascript">
 		$(document).ready(function(){

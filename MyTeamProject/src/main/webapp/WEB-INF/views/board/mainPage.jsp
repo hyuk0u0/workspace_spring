@@ -12,23 +12,48 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="/resources/js/uploadfn.js" type="text/javascript"></script>
 	<title>Insert title here</title>
+
 </head>
 <body>
-	<a href="/member/register">회원가입</a>
-	<br>
-	<c:if test="${empty login}">
-		<a href="/member/login">로그인</a>	
-	</c:if>
-	<c:if test="${!empty login}">
-		<a href="/member/logout">로그아웃</a>	
-	</c:if>
-	<a href="/member/myPage/${login.id}">마이페이지</a>
-	<br>
+	<jsp:include page="header.jsp"/>
+
+	
+	
 	<a href="/board/insert">글쓰기</a>
 	
+
+	
+	<div class="container">
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="text-center"><a href="#">모든 상품</a></h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<c:forEach items="${boardList}" var="boardDTO">
+						<div class="col-md-3">
+							<div class="thumbnail">
+								<a href="/board/read/${boardDTO.bno}">
+									<img src="../resources/show.png" style="width: 100%; height: 200px;">	
+								</a>
+								<hr>
+								<div class="caption">
+									<h5><a href="/board/read/${boardDTO.bno}">${boardDTO.title}</a></h5>
+									<p class="text-right">${boardDTO.price}원</p>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	
+	
+	<jsp:include page="footer.jsp"/>
 	
 	
 	<script type="text/javascript">

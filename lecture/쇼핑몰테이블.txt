@@ -1,0 +1,72 @@
+멤버, 보드, 굿즈, 카테고리, 거래내역, 장바구니, 업로드, 
+
+create table member(
+userId varchar2(18) primary key,
+userPw varchar2(18) not null,
+userName varchar2(18) not null,
+addr varchar2(100) not null,
+grantsNum number references grants (grantsNum)
+);
+
+create table grants(
+grantsNum number primary key,
+authority varchar2(20)
+);
+
+insert into grants (grno, authority) values (1, 'ceo');
+insert into grants (grno, authority) values (2, 'admin');
+insert into grants (grno, authority) values (3, 'marketer');
+insert into grants (grno, authority) values (4, 'consumer');
+
+create table board(
+boardNum number primary key,
+title varchar2(100) not null,
+fileName varchar2(200) not null,
+categoryNum number references category (categoryNum),
+goodsNum number references goods (goodsNum),
+regDate date default sysdate
+);
+
+create table category(
+categoryNum number primary key,
+categoryName varchar2(20) not null
+);
+
+create table goods(
+goodsNum number primary key,
+categoryNum number references category (categoryNum),
+goodsName varchar2(100) not null,
+price number default 0,
+);
+
+create table attach(
+attachNum number primary key,
+boardNum number references board (boardNum),
+fileName varchar2(200) not null
+);
+
+create table purchase(
+purchaseNum number primary key,
+userId references member(userId),
+categoryNum number references category (categoryNum),
+goodsNum number references goods (goodsNum),
+deliveryCode varchar2(100) not null,
+purDate date default sysdate
+);
+
+create table basket(
+basketNum number primary key,
+userId references member(userId),
+categoryNum number references category (categoryNum),
+grantsNum references goods (grantsNum)
+);
+
+
+
+
+
+
+
+
+
+

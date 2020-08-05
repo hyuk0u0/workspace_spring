@@ -10,4 +10,42 @@
 	<select id="selectGoods" resultType="GoodsDTO">
 		select * from goods where cno = #{cno}
 	</select>
+	
+	<insert id="insert">
+		insert into board (bno, title, cno, gno) values (#{bno}, #{title}, #{cno}, #{gno})
+	</insert>
+	
+	<select id="getBno" resultType="Integer">
+		select max(bno) from board
+	</select>
+	
+	<delete id="deleteAttachByFileName">
+		delete from attach where fullname = #{filename}
+	</delete>
+	
+	<select id="getUno" resultType="Integer">
+		select NVL2(max(uno), max(uno) + 1, 1) from attach
+	</select>
+	
+	<insert id="addAttach">
+		insert into attach (uno, fullname, bno) values (#{uno}, #{filename}, #{bno})
+	</insert>
+	
+	<select id="mainPage" resultType="BoardDTO">
+		select * from board b, goods g, category c where b.gno = g.gno and b.cno = c.cno order by bno desc
+	</select>
+	
+	<select id="read" resultType="BoardDTO">
+		select * from board where bno = #{bno}
+	</select>
+	
+	<select id="selectCategory" resultType="CategoryDTO">
+		select * from category 
+	</select>
+	
+	<select id="getAttach" resultType="String">
+		select fullname from attach where bno = #{bno} order by uno
+	</select>
+	
+
 </mapper>

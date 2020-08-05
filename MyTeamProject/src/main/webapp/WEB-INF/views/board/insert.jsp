@@ -39,6 +39,8 @@
 </head>
 <body>
 	
+	<jsp:include page="header.jsp"/>
+	
 	<div class="container">
 		<div class="row text-center">
 			<h1>글쓰기</h1>
@@ -70,6 +72,9 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<jsp:include page="footer.jsp"/>
 	
 	<script type="text/javascript">
 		function itemChange(obj) {
