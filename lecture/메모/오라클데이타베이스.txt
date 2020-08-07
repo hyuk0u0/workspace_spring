@@ -1,0 +1,201 @@
+오라클  - 다운로드  - Oracle Database 11g Release 2
+Oracle Database 11g Release 2 Express Edition for Windows 64
+
+setup.exe - 비번 sys1234
+
+C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib 에잇는 ojdbc6.jar
+
+Create
+Read(Retrieve)
+Update
+Delete
+
+내pc 우클릭 관리 - 서비스및 응용프로그램 - 서비스 - OracleServiceXE, OracleXETNSListener 이게 실행 되어있어야함
+
+cmd - sqlplus - user-name에 system - password에 sys1234
+exit = 빠져나오기
+quit
+
+sqlplus system/sys1234 // 보안에 취약
+
+sql문: 맨 마지막에 ;을 붙임
+sqlplus 명령어: 맨 마지막에 ;을 붙일 수도 있고 안 붙을수도 잇다.
+
+table에 데이터를 입력, 조회, 수정, 삭제 (CRUD)를 할 때 사용하는 SQL을 DML이라고 한다.
+DML: Data Manipulation Language(데이터 조작 언어)
+insert
+select
+update
+delete
+=======
+DB에서 객체를 만들거나 수정하거나 삭제하는 작업을 할 때 사용하는 sql을 DDL이라고한다
+DDL: Data Definition Language(데이터 정의 언어)
+create // CREATE USER ca IDENTIFIED BY ca 생성
+alter // ALTER USER ca IDENTIFIED BY ca2; 변경
+drop // DROP USER ca; 삭제
+=============
+DB 작업 중에 사용자에게 권한을 주는 작업을 할 때 사용하는 sql을 DCL이라고 한다.
+DCL: Data Control Language
+grant // GRANT CONNECT, RESOURCE, DBA TO ca 허용
+revoke // REVOKE CONNECT, resource, dba FROM ca 취소
+TCL(commit, rollback)
+===============================================
+
+계정 생성...
+conn id/password 접근
+SELECT * FROM DBA_ROLE_PRIVS WHERE GRANTEE = 'CA'; 권한 목록
+
+CREATE USER ca IDENTIFIED BY ca
+create user ca identified by ca
+
+GRANT CONNECT, RESOURCE, DBA TO ca
+
+connect resource, dba
+
+ca계정으로부터 connect 권한을 회수하세요
+REVOKE CONNECT FROM ca
+
+ca계정으로부터 RESOURCE, DBA 권한을 회수하세요.
+REVOKE CONNECT, resource, dba FROM ca
+
+============================================
+
+계정 비밀번호 변경
+ALTER USER ca IDENTIFIED BY ca2;
+계정 삭제...
+DROP USER ca;
+
+table 생성.....
+
+CREATE TABLE test(
+id VARCHAR2(6),   문자
+name VARCHAR2(21),
+age NUMBER(3), 숫자
+address NVARCHAR2(7) 
+);
+
+
+
+TABLE 삭제
+DROP TABLE test;
+DROP TABLE tbl_test2 CASCADE CONSTRAINTS; //제약조건 무시하고 삭제하고싶을떄
+
+id, name, age 컬럼으로 이루어진
+test2 테이블을 생성하시오.
+
+CREATE TABLE test2(
+id CHAR(5),
+name CHAR(12),
+age NUMBER(3)
+);
+
+CHAR(5): ABE -> 5글자가 입력됨. 공백 2개를 데이터로 인식하고 있다.
+VARCHAR2(5): ABE -> 3글자만 입력됨.
+
+table 수정
+
+
+컬럼 추가
+ALTER TABLE test2 ADD address VARCHAR2(100);
+ALTER TABLE test2 ADD phone CHAR(11);
+
+컬럼 수정
+ALTER TABLE test2 MODIFY phone VARCHAR2(11);
+
+TEST2 테이블의 NAME 컬럼의 자료형을 VARCHAR2로 변경해주세요.
+ALTER TABLE test2 MODIFY name VARCHAR2(12);
+
+컬럼명 변경...
+ALTER TABLE test2 RENAME COLUMN phone TO tel;
+ALTER TABLE test2 RENAME COLUMN tel TO phone;
+
+ALTER TABLE test2 RENAME COLUMN age TO nai;
+ALTER TABLE test2 RENAME COLUMN nai TO age;
+
+컬럼 삭제
+ALTER TABLE test2 DROP COLUMN phone;
+
+ALTER TABLE test2 DROP COLUMN address;
+
+
+테이블명 변경
+
+RENAME test2 TO tbl_test2;
+
+|||||||||||||||||||||||||||||||||||||
+
+
+CREATE TABLE employee(
+eid VARCHAR2(6),
+ename VARCHAR2(21),
+depart VARCHAR2(21)
+);
+
+입력
+
+INSERT INTO employee (eid, ename, depart)
+values
+('e001', '홍길동', '인사팀');
+
+INSERT INTO employee (eid, ename, depart)
+values
+('e005', 'kim', '관리부');
+
+INSERT INTO employee (ename, depart)
+values
+('유관순', '홍보팀');
+
+INSERT INTO employee (depart, eid)
+valuesSE
+('비서팀', 'e004');
+
+SELECT eid FROM employee WHERE ename = '김유신'; // ename이 김유신인 eid를 불러옴
+SELECT * FROM employee; // 모든 데이터를 불러옴
+DESC employee;
+
+
+=============================
+
+DML 작업을 할 때;
+C, U, D
+
+commit
+rollback
+
+insert into employee
+(eid)
+values
+('e006');
+
+insert into employee
+(eid)
+values
+('e007');
+
+savepoint a;
+
+insert into employee
+(eid)
+values
+('e008');
+
+
+
+rollback to a; // 세이브포인트 a까지만 롤백함
+
+INSERT INTO employee
+values
+('e007', 'park', '청소부'); 
+
+=================================================
+
+UPDATE employee
+SET
+ename = 'park',
+depart = '인사팀'
+where
+eid = 'e005'; // 조건 eid가 e005인곳만 바꿔줌.
+
+INSERT INTO employee (eid, ename, depart)
+values
+('e003', '유관순', '청소팀');

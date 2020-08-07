@@ -1,0 +1,35 @@
+Java
+DB
+Connectivity 
+
+Data(Base)
+Access
+Object
+
+===full package명
+oracle.jdbc.driver.OracleDriver
+
+oracle.jdbc.driver.OracleDriver.class
+
+private final String DRIVERNAME = "oracle.jdbc.driver.OracleDriver";
+ojdbc6jar - jdbc - driver - 오라클드라이버 카피
+
+private final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+커넥션잇는곳에 프로펄티스 - 커넥션 url
+
+pstmt.executeUpdate(); ===============> select (x)
+
+pstmt.executeQuery(); =============>select
+
+하나의 사건으로
+여러 개의 변화가 발생할 때
+이럴 때 
+transaction 상황
+CRUD
+================
+A: B야, 김태희 소개시켜줬으니까 1만원만 빌려줘.
+B: 알았어. (A에게 1만원을 계좌이체한다)
+-------> B의 계좌에서 1만원이 차감이 됨... update
+------------(정전)
+	A계좌에 1만원이 증감이 됨 update
+

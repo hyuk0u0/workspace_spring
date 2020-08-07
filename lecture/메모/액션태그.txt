@@ -1,0 +1,15 @@
+액션태그
+
+<jsp: 로 시작 
+
+<jsp:include></jsp:include> (데이터 넘길떄)
+<jsp:include/> (넘길필요없을때)
+
+<jsp:forward
+<jsp:param
+
+
+usebean, setproperty, getproperty
+javabean
+
+객체 = bean = entity = instance = object

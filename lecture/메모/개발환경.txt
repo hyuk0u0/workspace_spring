@@ -1,0 +1,83 @@
+자바 and eclipse 개발 환경
+
+java jdk 8 download 구글링
+eclipse zip download 2019 12 버젼 
+
+
+java  --   윈도우 + s 시스템 환경 변수 = 시스템변수 새로만들기 --  변수이름 : JAVA_HOME 변수 값 C:\Program Files\Java\jdk1.8.0_241
+path C:\Program Files\Java\jdk1.8.0_241\bin - 윈도우 r - cmd - javac 여러줄나오면잘됨
+
+eclipse -- window preferences = encoding - other utf-8
+css files utf-8 나머지도 다바꿈
+file - new file - other
+java project - myjava
+
+emmet eclipse 구글링
+이클립스 help - install new software - http://download.emmet.io/eclipse/updates/ 복사 넣기
+
+window - preferences - keys - binding - Ctrl-M 찾아서 merge Lines를 unbind해야함
+
+window - preferences - font - text font클릭 - D2Coding ㄱㄱ 
+
+window - preferences - emmet - 확장자 제일앞에 jsp, jspf, tag, 넣기
+
+패키지 익스플로어 우클릭 import - git 검색 Projects from Git-  Clone URI - uri에 복사 https://github.com/sebaek/java20200327.git
+디렉토리에서 브라우즈 - 문서 - 이클립스 폴더 저장
+
+
+================================================================================
+오라클DB개발환경 
+
+오라클  - 다운로드  - Oracle Database 11g Release 2
+Oracle Database 11g Release 2 Express Edition for Windows 64
+
+내pc 우클릭 관리 - 서비스및 응용프로그램 - 서비스 - OracleServiceXE, OracleXETNSListener 이게 실행 되어있어야함
+
+setup.exe - 비번 sys1234
+
+=======================================================================
+jsp개발환경
+
+http://tomcat.apache.org/ 접속
+좌측메뉴 - Download - Tomcat7 클릭
+3. 우측 화면 - 화면의 수직 중간 부분에
+  Binary Distributions - core - 32-bit-/64-bit Windows Service Installer (pgp, sha512) 클릭
+
+호스트 매니저, 이그젬플 선택 넥스트
+커넥션 포트 8089
+유저네임 ca 패스워드 ca
+
+0~1023:system port //사용하면안댐
+1024~65535 아무거나 사용가능
+자바 jre가 있는곳 찾아준다
+
+톰캣 폴더는 C:\Tomcat 7.0 여기에만듬
+새로 이클립스 폴더 만들고 오른쪽 맨위에 java ee 확인
+
+tomcat 설치된폴더 - bin - tomcat7w.exe 실행! - Start하면 localhost:8089 인터넷 주소창
+
+create a Dynamic Wep project // ctrl n 웹 - 다이나믹 웹프로젝트
+
+윈도우 프리페어런스 - 제네럴 - workspace - other utf-8
+윈도우 프리페어런스 - wep - css - utf-8
+윈도우 프리페어런스 - wep - html - utf-8
+윈도우 프리페어런스 - wep - jsp files - utf-8
+
+Servers 탭 - No servers... 클릭 - Apache - Tomcat 7.0 클릭 - tomcat7.0 폴더 선택 - finish
+Servers 탭 - Tomcat서버 만들어진거 더블클릭 - tomcat admin port 8009 - 저장
+Servers 탭 - 실행버튼 클릭하면 서버 on
+ctrl n 웹 - 다이나믹 웹프로젝트 - HelloWorld - Generate web.xml 체크
+web.xml, 배포서술자, deployment descriptor, d.d., 환경설정파일 (다같은말)
+프로젝트 = 컨텍스 = Context(Servlet Context)
+===========================================================================
+jstl 개발환경
+
+tomcat.apache.org 에서 Taglibs 탭 클릭 - download로 들어가기 - Apache Standard Taglib 클릭
+- 1.1버전 다운로드 클릭 -  binaries/ 클릭 - 밑에서 6번째 jakarta-taglibs-standard-1.1.2.zip  다운로드 - 압춘풀고 lib안에 있는거 두개 복사해서
+tomcat에 lib 붙여넣기 ㄱㄱ - jsp파일에 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 코드입력
+
+========================================================================
+cos (업로드관련)
+
+servlets.com - com.oreilly.servlet - cos-20.08.zip 내려받기 - 압축풀고 lib에 있는
+cos.jar 복사

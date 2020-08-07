@@ -1,0 +1,38 @@
+클라이언트(사용자)가 서버로 테이터를 전송합니다.
+클라이언트 -----------> 서버
+
+id=tt
+파라미터: 파라미터 네임 = 파라미터 밸류
+pw=123
+
+Servers - Tomcat - context - </Context> 위에
+<Resource
+	name="jdbc/oracle11g"
+	auth="Container"
+	type="javax.sql.DataSource"
+	driverClassName="oracle.jdbc.driver.OracleDriver"
+	url="jdbc:oracle:thin:@localhost:1521:xe"
+	username="ca3"
+	password="ca3"
+	maxTotal="4"
+	maxWaitMillis="5000"
+/>
+
+
+
+=============================
+JNDI(Java Naming Directory interface)
+aa
+vm
+ai
+
+servers - servers.xmi 에 65번째 줄 URIEncoding="utf-8" 붙여넣기!
+
+
+create table member(
+id varchar2(4) primary key,
+name varchar2(12) not null,
+age number(3) check(age<200)
+);
+
+insert into member values ('m001', 'kim', 11);

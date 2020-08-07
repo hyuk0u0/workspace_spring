@@ -1,0 +1,28 @@
+File 클래스
+- 파일, 폴더(디렉토리)를 관리하는 기능이 있는 클래스
+- 파일을 삭제할 수 있게 함.
+- 폴더를 생성과 삭제할 수 있게 함.
+
+
+
+
+
+                      <-------- InputStream Reader
+
+자바프로그램                                                   장치
+
+                          OutputStream Writer ----->
+
+
+스트림의 종류
+1. 전송되는 데이터의 크기에 따른 분류
+	-byte stream: 1byte 전송: ~Stream
+	-문자(char)스트림: 2byte 전송: ~er
+
+2. 특별한 기능이 있는지 여부에 따른 분류
+	(<-> 장치와 직접 연결이 되는지 여부에 따른 분류)
+	-노드스트림: FileInputStream, FileOutputStream, (장치와 직접 연결)
+	-필터스트림: BufferedInputStream, 
+바이트 스트림의 부모스트림 : InputStream, OutputStream
+
+문자 스트림의 부모스트림 : Reader. Writer

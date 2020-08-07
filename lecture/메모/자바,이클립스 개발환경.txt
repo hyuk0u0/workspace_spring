@@ -1,0 +1,28 @@
+java jdk 8 download 구글링
+eclipse zip download 2019 12 버젼 
+
+
+java  --   윈도우 + s 시스템 환경 변수 = 시스템변수 새로만들기 --  변수이름 : JAVA_HOME 변수 값 C:\Program Files\Java\jdk1.8.0_241
+path C:\Program Files\Java\jdk1.8.0_241\bin - 윈도우 r - cmd - javac 여러줄나오면잘됨
+
+eclipse -- window preferences = encoding - other utf-8
+css files utf-8 나머지도 다바꿈
+file - new file - other
+java project - myjava
+
+emmet eclipse 구글링
+이클립스 help - install new software - http://download.emmet.io/eclipse/updates/ 복사 넣기
+
+window - preferences - keys - binding - Ctrl-M 찾아서 merge Lines를 unbind해야함
+
+window - preferences - font - text font클릭 - D2Coding ㄱㄱ 
+
+window - preferences - emmet - 확장자 제일앞에 jsp, jspf, tag, 넣기
+
+패키지 익스플로어 우클릭 import - git 검색 Projects from Git-  Clone URI - uri에 복사 https://github.com/sebaek/java20200327.git
+디렉토리에서 브라우즈 - 문서 - 이클립스 폴더 저장 
+
+teacheryo 네이버
+이현기
+
+	

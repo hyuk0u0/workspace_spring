@@ -1,0 +1,24 @@
+full package명
+ex) new com.naver.Process();
+
+DTO : Data Transfer Object
+TO : Transfer Object
+DVO : Data value Object
+
+객체 = object = instance = bean = entity
+
+ DB클래스 - MemberDTO클래스 - Command인터페이스 - Insert - Select - Update
+- Delete - Process - Main
+
+1.Process 클랙스 생성
+2.MainEx main()메서드에서 Process 클래스를 이용해서 익명의 개체 1개 생성
+3.DB클래스 구현
+4.MemberDTO클래스 구현
+5.Command 인터페이스 구현
+6. InsertCommand, SelectCommand, UpdateCommand, DeleteCommand를 생성
+7. InsertCommand 구현
+8. SelectCommand 구현
+9. UpdateCommand 구현
+10. DeleteCommand 구현
+11. Process 클래스의 디폴트 생성자 구현
+12. MainEx 실행

@@ -1,0 +1,33 @@
+1. jsp의 기본 태그를 표기할 때 반드시 들어가는 코드는?
+<% %>
+2. jsp의 주석태그 <%-- --%>
+3. jsp의 지시어태그: <%@ %>
+	- page 지시어 태그: <%@ page %> 
+	1. login 관련 화면 session= "false"
+	2. errorPage 지정해줄 때 errorPage="xxxx.jsp"
+	3. 특정 페이지를 errorPage로 선언할 때, isError="true"
+	
+	-include 지시어 태그: <%@ include file="" %>
+	  -정적(stactic)으로 파일을 추가함: 코드 복사
+	  -추가되는 파일은 servlet이나 클래스로 변환되지 않습니다.
+	  -footer를 표기할 때 사용함.
+	
+	-taglib directive tag: <%@ taglib uri="" prefix="" %>
+		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+		<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+		<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+4. scriptlet tag: <% %> : 메서드나 생성자 스코프 (메소스 생성 불가)
+	<% %>
+	html코드
+	<% %>
+
+	<%
+	
+	%>
+
+5. declaration tag: <%! %>: 필드 스코프
+
+6. Expression Tag: <%= %> 반환형이 있는 메소드만 사용가능 (세미클론 안찍어도됨)
+
+	${   }
+	

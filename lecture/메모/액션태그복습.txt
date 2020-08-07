@@ -1,0 +1,58 @@
+action tag(include, forward, param, useBean, setPropery, getProperty...)
+- <jsp:include page=""/> == <%@ include file=""/>
+- <jsp:include page="">
+	<jsp:param value="" name=""/>
+  </jsp:include>
+
+- <jsp:forward page=""/>
+- <jsp:forward page="">
+	<jsp:param value="" name=""/>
+  </jsp:forward>
+
+index.html
+index.htm
+index.jsp
+
+포트번호 80으로 바꾸면 포트번호안나옴
+
+내장객체
+request
+response
+out
+application
+session
+config
+pageContext: EL은 scriptlet태그에 선원된 변수를 인식하지 못함. pageContext에 데이터 바인딩
+해서 사용햇음 
+page
+==================
+exception
+
+영역객체(데이터를 저장할 수 있는 기능을 가지고 있는 객체)
+
+pageContext(: page): 현재 페이지에서만 데이터가 유효
+request: 같은 요청
+session: 시간&브라우저
+application: 해당프로젝트 어디에서나 (방문자수)
+=====================================================
+${}
+${1111}
+"${3333}"
+'${3333}'
+<a href='${url}'></a>
+${"hello"}
+======
+${}: 연산이 가능하다. 산술연산(/), 비교연산, 논리연산, 삼항연산
+${}: null에 대해서 관대함.
+${}: ${empty msg} ${msg == null}
+	${not empty msg} ${msg != null}
+영역객체에 데이터 바인딩이 되어 있는데
+그 바인딩된 데이터가 List객체 또는 dto 객체일 때
+${dto.id}  ${dto["id"]}
+
+<c:forEach items="${list}" var = "dto">
+	${dto.id}
+</c:forEach>
+
+
+자바 동적 객체생성

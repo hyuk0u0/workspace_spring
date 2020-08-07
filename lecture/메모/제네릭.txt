@@ -1,0 +1,21 @@
+Generic: 자바 컬렉션 프레임워크에서 상자(객체)에 들어갈 수 있는 요소(객체)의 자
+료형을 규정하는 문법.
+
+autoboxing
+autounboxing
+
+
+List       Set         Map
+:	   :	       :
+ArrayList  HashSet     HashMap
+
+me1()메서드는 java.util.List로 만들어진
+list라는 변수명을 갖고 있다.
+단, 이 list에는 3, 4, 5...등의 정수를 저장할 수 있다.
+
+ArrayList...
+
+
+set
+순서가 없다 인덱스가 없다
+중복이 없다.

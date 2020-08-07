@@ -1,5 +1,8 @@
 멤버, 보드, 굿즈, 카테고리, 거래내역, 장바구니, 업로드, 
 
+ca20/ca20
+
+
 create table member(
 userId varchar2(18) primary key,
 userPw varchar2(18) not null,
@@ -13,10 +16,10 @@ grantsNum number primary key,
 authority varchar2(20)
 );
 
-insert into grants (grno, authority) values (1, 'ceo');
-insert into grants (grno, authority) values (2, 'admin');
-insert into grants (grno, authority) values (3, 'marketer');
-insert into grants (grno, authority) values (4, 'consumer');
+insert into grants (grantsNum, authority) values (1, 'ceo');
+insert into grants (grantsNum, authority) values (2, 'admin');
+insert into grants (grantsNum, authority) values (3, 'marketer');
+insert into grants (grantsNum, authority) values (4, 'consumer');
 
 create table board(
 boardNum number primary key,
@@ -36,7 +39,7 @@ create table goods(
 goodsNum number primary key,
 categoryNum number references category (categoryNum),
 goodsName varchar2(100) not null,
-price number default 0,
+price number default 0
 );
 
 create table attach(
@@ -57,10 +60,8 @@ purDate date default sysdate
 create table basket(
 basketNum number primary key,
 userId references member(userId),
-categoryNum number references category (categoryNum),
-grantsNum references goods (grantsNum)
+boardNum number references board (boardNum)
 );
-
 
 
 

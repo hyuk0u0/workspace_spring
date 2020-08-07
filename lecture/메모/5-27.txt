@@ -1,0 +1,75 @@
+포워딩 방식
+1. dispatcher(포워딩하셈)
+	RequestDispatcher dis = request.getRequestDispatcher("test2");
+	dis.forward(request, response);
+--- 요청이 1 개만 생성됨.
+	주소가 안바뀜.
+	get 방식 -> get 방식
+	post 방식 -> post 방식 
+
+2. redirect(리다이렉트하삼)
+	response.sendRedirect("test2");
+--- 요청이 2 개 이상이 생성됨.
+	주소가 바뀜.
+	get 방식 -> get 방식
+	post 방식 -> get 방식
+
+======================================================================
+request가 하는 일
+1. 한글 지원 
+	request.setcharacterEncoding("utf-8");
+2. client가 보내준 데이터 넘겨받기.
+	String val = request.getParameter(name);
+3. 데이터를 저장할 수 있는 기능(data binding)
+
+===============================================================
+초기화 파라미터
+
+컨텍스트 파라미터
+
+===========================
+
+Command 클래스에서 하는 일
+
+1. 클라이언트가 보내준 데이터 획득 및 가공
+
+2. DAO 객체 생성 및 해당 메서스 호출
+
+3. 데이터 바인딩(pageContext, request, session, application)
+
+4. 포워딩
+
+========================================================
+
+expression tag
+<%= %>
+
+====================================================
+<!-- 주석 --> 
+<%-- 주석 --%>
+===================================================
+
+response
+out
+
+pageContext
+request
+application 방문자
+session: scope(시간, 브라우저) 로그인과 관련된작업
+
+==================================
+
+1. session의 scope: 시간 & 브라우저
+	-일정 시간이 지나면 세션은 유지 되지 않음.
+	-다른 브라우저에서는 세션이 유지되지 않음.
+
+2. session 시간 설정
+	- setMaxInactiveInterval();메서드 호출
+
+3. 로그아웃 방법
+	-세션시간을 1으로 설정하기
+	-세션을 제거하기
+	-세션에 바인딩된 데이터 제거하기
+
+
+===================================

@@ -1,0 +1,17 @@
+리다이렉트 바인딩 방법 2개! 
+
+model 방식 주소창에 데이터가 남음
+
+	@RequestMapping("test2")
+	public String test2(Model model) { //데이터가 주소창에 남음
+		model.addAttribute("str1", "what"); 
+		return "redirect:/test3";
+	}
+
+RedirectAttrubutes 방식 주소창에 데이터가 안남음
+
+	@RequestMapping("test4")
+	public String test4(RedirectAttributes rtts) { //데이터가 주소창에 안남음
+		rtts.addFlashAttribute("str2", "who"); 
+		return "redirect:/test5";
+	}

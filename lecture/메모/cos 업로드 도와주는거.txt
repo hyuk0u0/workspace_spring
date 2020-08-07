@@ -1,0 +1,5 @@
+servlets.com - com.oreilly.servlet - cos-20.08.zip 내려받기 - 압축풀고 lib에 있는
+cos.jar 복사
+
+mime type: 첨부된 파일을 문자형태로 변환하는 포맷
+

@@ -1,0 +1,40 @@
+transaction(트랜잭션)
+
+boolean isOk = false;
+
+
+try{
+	conn = DriverManger.getConnection();
+conn.setAutoCommit(false);
+	isOk = true;
+}catch(Exception e){
+
+}finally{
+try{
+if(isOk){
+conn.commit();
+} else {
+conn.rollback();
+}catch{
+}
+}
+
+프로젝트 수행에 있어서 주의사항
+
+1. 절대 싸우지 마세요.
+2. 쉬는 시간을 지켜주세요.
+   매 시각 50분부터 ~ 정각...
+   회의: 강의실 벗어날 수도 있는데, 7층을 벗어나지는 마세요.
+3. 실력 향상...
+   - 작업 분담을 기능별로...
+
+일반계좌 normal_account
+국적 주민번호 이름 나이 계좌번호 잔액
+nationality ssn(주키) name age account assets
+입금 출금 계좌이체 잔액조회
+
+적금통장 saving_account
+국적 주민번호 이름 나이 계좌번호 잔액
+nationality ssn(외래키) name age account assets
+입금 잔액조회
+입금된 금액의 + 1%

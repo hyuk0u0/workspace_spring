@@ -1,0 +1,30 @@
+3. 변수 선언 공식
+
+자료형 변수명 = 자료형에 맞는 값;
+boolean: true, false
+char: '' char c = 65; char a = 97;
+byte: -128 ~127
+short
+int : 21억
+long : lnog a = 333L;
+float : f = 3.123F;
+double d = 3.13;
+
+자료형 변수명 = new 생성자();
+String msg = "hello";
+String msg = new String("hello");
+
+String 클래스의 불변적 성격
+
+String msg = new String("hello");
+sout(msg);
+msg = new String("gogo");
+sout(msg);
+
+me81()메서드는
+문자열과 그 문자열의 특정 인덱스를 넘겨받아서
+그 인덱스에 해당하는 문자를 출력하는 기능을 갖고 있다.
+
+me142()메서드는
+파일명을 외부에서 입력받아
+원래 파일명을 반환하는 기능을 갖고있음.

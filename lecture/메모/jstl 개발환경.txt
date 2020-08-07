@@ -1,0 +1,8 @@
+tomcat.apache.org 에서 Taglibs 탭 클릭 - download로 들어가기 - Apache Standard Taglib 클릭
+- 1.1버전 다운로드 클릭 -  binaries/ 클릭 - 밑에서 6번째 jakarta-taglibs-standard-1.1.2.zip  다운로드 - 압춘풀고 lib안에 있는거 두개 복사해서
+tomcat에 lib 붙여넣기 ㄱㄱ - jsp파일에 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 코드입력
+
+
+FrontController
+select insert insertui
+월요일날 시험봄 
