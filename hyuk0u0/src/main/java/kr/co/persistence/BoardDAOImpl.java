@@ -92,8 +92,15 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 	
+	//사진 삭제
 	@Override
 	public void deleteAttachByFileName(String filename) {
 		session.delete(NS + ".deleteAttachByFileName", filename);
+	}
+	
+	//게시물 리스트
+	@Override
+	public List<BoardDTO> boardList() {
+		return session.selectList(NS + ".boardList");
 	}
 }

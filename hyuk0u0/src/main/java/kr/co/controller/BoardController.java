@@ -26,8 +26,10 @@ public class BoardController {
 	
 	//메인페이지
 	@RequestMapping(value = "/mainPage", method = RequestMethod.GET)
-	public void mainPage() {
+	public void mainPage(Model model) {
+		List<BoardDTO> boardList = boardService.boardList();
 		
+		model.addAttribute("boardList", boardList);
 	}
 	
 	//관리자페이지

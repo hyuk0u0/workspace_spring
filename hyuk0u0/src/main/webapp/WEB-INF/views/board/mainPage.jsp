@@ -17,6 +17,12 @@
 <body>
 	<jsp:include page="../includes/header.jsp" />
 	
+	<c:forEach items="${boardList}" var="boardDTO">
+		${boardDTO.boardNum}
+	</c:forEach>
+	
+	
+	
 	<jsp:include page="../includes/footer.jsp" />
 </body>
 </html>

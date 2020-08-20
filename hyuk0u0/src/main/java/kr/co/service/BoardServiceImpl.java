@@ -80,4 +80,10 @@ public class BoardServiceImpl implements BoardService{
 	public void deleteAttachByFileName(String filename) {
 		boardDAO.deleteAttachByFileName(filename);
 	}
+	
+	//게시물 리스트
+	@Override
+	public List<BoardDTO> boardList() {
+		return boardDAO.boardList();
+	}
 }

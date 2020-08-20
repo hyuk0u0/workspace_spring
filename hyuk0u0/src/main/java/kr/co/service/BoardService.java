@@ -35,5 +35,8 @@ public interface BoardService {
 	
 	//사진 삭제
 	void deleteAttachByFileName(String filename);
+	
+	//게시물 리스트
+	List<BoardDTO> boardList();
 
 }
