@@ -239,7 +239,7 @@
 					}
 				});
 			});
-
+			
 			$.getJSON("/getAttach/" + bno, function(arr) {
 				console.log(arr[0]);
 				for(var i = 0; i < arr.length; i++) {

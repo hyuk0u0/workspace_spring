@@ -13,4 +13,30 @@
 		INSERT INTO member (userId, userPw, userName, addr, grantsNum) values (#{userId}, #{userPw}, #{userName}, #{addr}, #{grantsNum})
 	</insert>
 	
+	<!-- 로그인 -->
+	<select id="loginPost" resultType="LoginDTO">
+		SELECT * FROM member WHERE userId = #{userId} and userPw = #{userPw}
+	</select>
+	
+	<!-- 마이페이지 -->
+	<select id="myPage" resultType="MemberDTO">
+		SELECT * FROM member WHERE userId = #{userId}
+	</select>
+	
+	<!-- 업데이트페이지 -->
+	<select id="update" resultType="MemberDTO">
+		SELECT * FROM member WHERE userId = #{userId}
+	</select>
+	
+	<!-- 업데이트 -->
+	<update id="updatePost">
+		UPDATE member SET userPw = #{userPw}, userName = #{userName}, addr = #{addr} WHERE userId = #{userId}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="delete">
+		DELETE FROM member WHERE userId = #{userId}
+	</delete>
+	
+	
 </mapper>

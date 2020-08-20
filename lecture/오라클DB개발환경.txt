@@ -37,12 +37,12 @@ revoke
 TCL(commit, rollback)
 ========================================
 계정 생성
-CREATE USER ca IDENTIFIED BY ca;
+CREATE USER ca15 IDENTIFIED BY ca15;
 conn ca/ca // 사용자로 접근.
 show user // 현재 사용자 보여줌
 =========================================
 권한 부여/회수
-GRANT CONNECT, RESOURCE, DBA TO ca; // 권한 부여 (권한은 SYSTEM이 줄 수 있음)
+GRANT CONNECT, RESOURCE, DBA TO ca15; // 권한 부여 (권한은 SYSTEM이 줄 수 있음)
 SELECT * FROM DBA_ROLE_PRIVS WHERE GRANTEE = 'CA'; // 권한 목록
 REVOKE CONNECT, RESOURCE, dba FROM ca; // 권한 회수
 =========================================

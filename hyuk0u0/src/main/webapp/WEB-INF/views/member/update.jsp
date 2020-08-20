@@ -15,27 +15,33 @@
 	<title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../includes/header.jsp" />
+	<jsp:include page="../includes/header.jsp" />
+	
 	<div class="container">
 		<div class="row">
-			<form action="/member/loginPost" method="post" id="loginForm">
+			<form action="/member/updatePost" method="post" id="updateForm">
 				<div class="form-group">
 					<label for="userId">아이디</label>
-					<input id="userId" name="userId" class="form-control">
+					<input class="form-control" id="userId" name="userId" value="${memberDTO.userId}" readonly>
 				</div>
 				<div class="form-group">
 					<label for="userPw">비밀번호</label>
-					<input id="userPw" name="userPw" class="form-control">
+					<input class="form-control" id="userPw" name="userPw" type="password" value="${memberDTO.userPw}">
 				</div>
+				<div class="form-group">
+					<label for="userName">성함</label>
+					<input class="form-control" id="userName" name="userName" value="${memberDTO.userName}">
+				</div>
+				<div class="form-group">
+					<label for="addr">주소</label>
+					<input class="form-control" id="addr" name="addr" value="${memberDTO.addr}">
+				</div>
+				<input type="hidden" name="grantsNum" value="4">
 			</form>
 			<div class="form-group">
-				<button type="button" id="submit" class="btn btn-primary">로그인</button>
+				<button class="btn btn-primary" type="button" id="submit">수정</button>
 				<button class="cencle btn btn-primary" type="button">취소</button>
-				<c:if test="${loginMsg == 'fail'}">
-					<p style="color: red;">아이디 또는 비밀번호가 일치하지 않습니다.</p>
-				</c:if>
 			</div>
-
 		</div>
 	</div>
 	
@@ -45,29 +51,33 @@
 		$(document).ready(function(){
 			//취소
 			$(".cencle").on("click", function(){
-				location.href = "/board/mainPage";
+				location.href = "/member/myPage/${memberDTO.userId}";
 			});
 
+			//회원가입
 			$("#submit").on("click", function(){
-				if($("#userId").val() == "") {
-					alert("아이디를 입력해주세요.");
-					$("#userId").focus();
-					return false
-				}
-			
-
 				if($("#userPw").val() == ""){
-					alert("비밀번호를 입력해주세요.");
+					alert("비밀번호를 입력해주세요");
 					$("#userPw").focus();
 					return false;
 				}
 
-				$("#loginForm").submit();
+				if($("#userName").val() == ""){
+					alert("성함을 입력해주세요");
+					$("#userName").focus();
+					return false;
+				}
 
+				if($("#addr").val() == ""){
+					alert("주소를 입력해주세요");
+					$("#addr").focus();
+					return false;
+				}
+			
+					$("#updateForm").submit();
 			});
 		});
+
 	</script>
-	
-	
 </body>
 </html>

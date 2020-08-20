@@ -25,16 +25,12 @@ import kr.co.utils.Utils;
 
 @Controller
 public class UploadAjaxController {
-
+	
 	private String uploadPath = "C:" + File.separator + "upload";
 	
 	@Inject
 	private BoardService boardService;
 	
-	@RequestMapping(value = "/uploadajax", method = RequestMethod.GET)
-	public void uploadajax () {
-		
-	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/uploadajax", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
@@ -59,7 +55,7 @@ public class UploadAjaxController {
 			int idx = filename.lastIndexOf(".");
 			String format = filename.substring(idx + 1);
 			
-			MediaType mType = Utils.getmediaType(format);
+			MediaType mType = Utils.getMediaType(format);
 			
 			in = new FileInputStream(uploadPath + filename);
 			
@@ -74,6 +70,7 @@ public class UploadAjaxController {
 				headers.add("Content-Disposition", "attachment;filename=\"" + new String(originalName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
 			}
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.OK);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
@@ -87,7 +84,6 @@ public class UploadAjaxController {
 			}
 		}
 		return entity;
-		
 	}
 	
 	@ResponseBody
@@ -98,7 +94,7 @@ public class UploadAjaxController {
 		
 		int idx = filename.lastIndexOf(".");
 		String format = filename.substring(idx + 1);
-		MediaType mType = Utils.getmediaType(format);
+		MediaType mType = Utils.getMediaType(format);
 		
 		if (mType != null) {
 			String pre = filename.substring(0, 12);
@@ -116,12 +112,4 @@ public class UploadAjaxController {
 		
 		return "success";
 	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/getAttach/{bno}", method = RequestMethod.GET)
-	public List<String> getAttach(@PathVariable("bno") Integer bno) {
-		return boardService.getAttach(bno);
-	}
-	
-	
 }

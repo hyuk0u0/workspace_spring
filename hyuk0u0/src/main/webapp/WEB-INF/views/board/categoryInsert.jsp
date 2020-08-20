@@ -15,29 +15,49 @@
 	<title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../includes/header.jsp" />
+	<jsp:include page="../includes/header.jsp" />
+	
 	<div class="container">
 		<div class="row">
-			<form action="/member/loginPost" method="post" id="loginForm">
+			<h3>카테고리 등록</h3>
+			<hr>
+			<form action="/board/categoryInsert" method="POST" id="categoryForm">
 				<div class="form-group">
-					<label for="userId">아이디</label>
-					<input id="userId" name="userId" class="form-control">
-				</div>
-				<div class="form-group">
-					<label for="userPw">비밀번호</label>
-					<input id="userPw" name="userPw" class="form-control">
+					<label for="categoryName">카테고리명</label>
+					<input class="form-control" id="categoryName" name="categoryName">
 				</div>
 			</form>
 			<div class="form-group">
-				<button type="button" id="submit" class="btn btn-primary">로그인</button>
+				<button class="btn btn-primary" type="button" id="submit">등록</button>
 				<button class="cencle btn btn-primary" type="button">취소</button>
-				<c:if test="${loginMsg == 'fail'}">
-					<p style="color: red;">아이디 또는 비밀번호가 일치하지 않습니다.</p>
-				</c:if>
 			</div>
-
+			<hr>
+			<h3>카테고리 조회</h3>
+			<hr>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>카테고리 번호</th>
+						<th>카테고리 이름</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${categoryList}" var="categoryDTO">					
+						<tr>
+							<td>${categoryDTO.categoryNum}</td>
+							<td>${categoryDTO.categoryName}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
+	
+	<c:if test="${!empty msg}">
+		<script type="text/javascript">
+			alert("${msg}");
+		</script>
+	</c:if>
 	
 	<jsp:include page="../includes/footer.jsp" />
 	
@@ -45,29 +65,22 @@
 		$(document).ready(function(){
 			//취소
 			$(".cencle").on("click", function(){
-				location.href = "/board/mainPage";
+				location.href = "/board/adminPage";
 			});
 
-			$("#submit").on("click", function(){
-				if($("#userId").val() == "") {
-					alert("아이디를 입력해주세요.");
-					$("#userId").focus();
-					return false
-				}
-			
 
-				if($("#userPw").val() == ""){
-					alert("비밀번호를 입력해주세요.");
-					$("#userPw").focus();
+			$("#submit").on("click", function(){
+				if($("#categoryName").val() == ""){
+					alert("카테고리를 입력해주세요");
+					$("#categoryName").focus();
 					return false;
 				}
 
-				$("#loginForm").submit();
-
+				$("#categoryForm").submit();
+				
 			});
 		});
+
 	</script>
-	
-	
 </body>
 </html>

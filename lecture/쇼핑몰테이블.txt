@@ -11,6 +11,10 @@ addr varchar2(100) not null,
 grantsNum number references grants (grantsNum)
 );
 
+insert into member (userId, userPw, userName, addr, grantsNum) values ('ceo', '1', '경영자', '강남', 1);
+insert into member (userId, userPw, userName, addr, grantsNum) values ('admin', '1', '관리자', '강남', 2);
+insert into member (userId, userPw, userName, addr, grantsNum) values ('marketer', '1', '판매자', '강남', 3);
+
 create table grants(
 grantsNum number primary key,
 authority varchar2(20)
@@ -62,12 +66,3 @@ basketNum number primary key,
 userId references member(userId),
 boardNum number references board (boardNum)
 );
-
-
-
-
-
-
-
-
-

@@ -15,11 +15,12 @@
 	<title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="../includes/header.jsp" />
 	<div class="container">
 		<div class="row">
 			<form action="/member/register" method="post" id="regForm">
 				<div class="form-group">
-					<label for="userPw">아이디</label>
+					<label for="userId">아이디</label>
 					<input class="form-control" id="userId" name="userId">
 				</div>
 				<div class="form-group">
@@ -45,6 +46,8 @@
 			</div>
 		</div>
 	</div>
+	
+	<jsp:include page="../includes/footer.jsp" />
 	
 	<script type="text/javascript">
 		$(document).ready(function(){

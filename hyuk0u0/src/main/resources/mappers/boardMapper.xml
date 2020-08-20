@@ -3,5 +3,74 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="b.o.a">
-
+	
+	<!-- 카테고리 조회 -->
+	<select id="categoryList" resultType="CategoryDTO">
+		SELECT * FROM category
+	</select>
+	
+	<!-- 카테고리 중복확인 -->
+	<select id="categoryChk" resultType="int">
+		SELECT COUNT(*) FROM category WHERE categoryName = #{categoryName}
+	</select>
+	
+	<!-- 카테고리 등록 -->
+	<insert id="categoryInsert">
+		INSERT INTO category (categoryNum, categoryName) values (#{categoryNum}, #{categoryName})
+	</insert>
+	
+	<!-- 카테고리 번호 ++ -->
+	<select id="getCategoryNum" resultType="int">
+		SELECT NVL2(max(categoryNum), max(categoryNum) + 1, 1) FROM category
+	</select>
+	
+	<!-- 상품 중복확인 -->
+	<select id="goodsChk" resultType="int">
+		SELECT COUNT(*) FROM goods WHERE goodsName = #{goodsName}
+	</select>
+	
+	<!-- 상품 번호++ -->
+	<select id="getGoodsNum" resultType="int">
+		SELECT NVL2(max(goodsNum), max(goodsNum) + 1, 1) FROM goods
+	</select>
+	
+	<!-- 상품 등록 -->
+	<insert id="goodsInsert">
+		INSERT INTO goods (goodsNum, categoryNum, goodsName, price) values (#{goodsNum}, #{categoryNum}, #{goodsName}, #{price})
+	</insert>
+	
+	<!-- 상품 리스트 ajax -->
+	<select id="goodsList" resultType="GoodsDTO">
+		SELECT * FROM goods where categoryNum = #{categoryNum}
+	</select>
+	
+	<!-- 멤버 리스트 -->
+	<select id="memberList" resultType="MemberDTO">
+		SELECT * FROM member where grantsNum = '4'
+	</select>
+	
+	<!-- 게시글 번호++ -->
+	<select id="getBoardNum" resultType="int">
+		SELECT NVL2(max(boardNum), max(boardNum) + 1, 1) FROM board
+	</select>
+	
+	<!-- 게시글 등록 -->
+	<insert id="insert">
+		INSERT INTO board (boardNum, title, fileName, categoryNum, goodsNum) values (#{boardNum}, #{title}, #{fileName}, #{categoryNum}, #{goodsNum})
+	</insert>
+	
+	<!-- 사진번호 ++ -->
+	<select id="getAttachNum" resultType="int">
+		SELECT NVL2(max(attachNum), max(attachNum) + 1, 1) FROM attach
+	</select>
+	
+	<!-- 사진저장 -->
+	<insert id="addAttach">
+		INSERT INTO ATTACH (attachNum, fileName, boardNum) values (#{attachNum}, #{fileName}, #{boardNum})
+	</insert>
+	
+	<!-- 사진삭제 -->
+	<delete id="deleteAttachByFileName">
+		DELETE FROM attach WHERE fileName = #{filename}
+	</delete>
 </mapper>
